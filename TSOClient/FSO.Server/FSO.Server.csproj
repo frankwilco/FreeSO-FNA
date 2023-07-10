@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FSO.Server</RootNamespace>
     <AssemblyName>server</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -301,10 +301,6 @@
     <ProjectReference Include="..\FSO.Common.Domain\FSO.Common.Domain.csproj">
       <Project>{9848faf5-444a-48cc-a26a-8115d8c4fb52}</Project>
       <Name>FSO.Common.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FSO.Server.Api\FSO.Server.Api.csproj">
-      <Project>{19a2e153-246d-4d38-a28e-1e4d36d7e28f}</Project>
-      <Name>FSO.Server.Api</Name>
     </ProjectReference>
     <ProjectReference Include="..\FSO.Server.Clients\FSO.Server.Clients.csproj">
       <Project>{329e0aee-7871-40a7-b5af-8c0d0086ef71}</Project>
