@@ -25,7 +25,7 @@ namespace FSO.Server.Database.DA.LotTop100
             {
                 Context.Connection.Execute("CALL fso_lot_top_100_calc_all(@date, @shard_id);", new { date = date, shard_id = shard_id });
                 return true;
-            }catch(Exception ex)
+            }catch (Exception)
             {
                 return false;
             }
@@ -61,7 +61,7 @@ namespace FSO.Server.Database.DA.LotTop100
                 });
 
                 Context.Connection.Execute("REPLACE INTO fso_lot_top_100 (category, rank, shard_id, lot_id, minutes) VALUES (@category, @rank, @shard_id, @lot_id, @minutes)", valuesConverted);
-            }catch(Exception ex)
+            }catch (Exception)
             {
             }
         }

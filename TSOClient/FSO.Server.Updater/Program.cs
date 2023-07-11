@@ -128,7 +128,7 @@ namespace FSO.Server.Watchdog
                         {
                             entry.ExtractToFile(targPath, true);
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             Console.WriteLine("Could not replace " + targPath + "!");
                         }

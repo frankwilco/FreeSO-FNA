@@ -15,7 +15,7 @@ namespace FSO.Server.Core
             Image<Rgba32> result = null;
             try
             {
-                result = Image.Load(stream);
+                result = (Image<Rgba32>)Image.Load(stream);
             }
             catch (Exception)
             {
@@ -24,7 +24,8 @@ namespace FSO.Server.Core
             stream.Close();
             
             if (result == null) return null;
-            var data = result.SavePixelData();
+            Span<byte> data = null;
+            result.CopyPixelDataTo(data);
 
             for (int i = 0; i < data.Length; i += 4)
             {
@@ -35,7 +36,7 @@ namespace FSO.Server.Core
 
             return new TexBitmap
             {
-                Data = data,
+                Data = data.ToArray(),
                 Width = result.Width,
                 Height = result.Height,
                 PixelSize = 4

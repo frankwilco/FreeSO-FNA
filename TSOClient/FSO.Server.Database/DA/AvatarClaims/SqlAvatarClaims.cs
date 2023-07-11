@@ -22,7 +22,7 @@ namespace FSO.Server.Database.DA.AvatarClaims
                 var newClaim = Context.Connection.Query<DbAvatarClaim>("SELECT * FROM fso_avatar_claims WHERE avatar_claim_id = @claim_id AND owner = @owner", new { claim_id = (int)id, owner = newOwner }).FirstOrDefault();
                 return newClaim != null;
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 return false;
             }
@@ -78,7 +78,7 @@ namespace FSO.Server.Database.DA.AvatarClaims
                 return Context.Connection.Query<int>("INSERT INTO fso_avatar_claims (avatar_id, owner, location) " +
                     " VALUES (@avatar_id, @owner, @location); SELECT LAST_INSERT_ID();", claim).First();
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 return null;
             }

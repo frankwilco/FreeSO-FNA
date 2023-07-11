@@ -1,23 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FSO.Server.Common;
+﻿using FSO.Server.Common;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace FSO.Server.Api.Core
 {
     public class Startup : IAPILifetime
     {
-        public IApplicationLifetime AppLifetime;
+        public IHostApplicationLifetime AppLifetime;
 
         public Startup(IConfiguration configuration)
         {
@@ -31,23 +23,23 @@ namespace FSO.Server.Api.Core
         {
             services.AddCors(options =>
             {
-               options.AddDefaultPolicy(
-                   builder =>
-                   {
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
 
-                       builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("content-disposition");
-                   });
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithExposedHeaders("content-disposition");
+                    });
 
                 options.AddPolicy("AdminAppPolicy",
                     builder =>
                     {
                         builder.WithOrigins("https://freeso.org", "http://localhost:8080").AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithExposedHeaders("content-disposition");
                     });
-            }).AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            }).AddMvc(options => options.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env, IHostApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {

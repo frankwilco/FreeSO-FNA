@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using FSO.Server.Common;
+﻿using FSO.Server.Common;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace FSO.Server.Api.Core
@@ -22,7 +17,7 @@ namespace FSO.Server.Api.Core
         public static IAPILifetime RunAsync(string[] args)
         {
             var host = CreateWebHostBuilder(args).Build();
-            var lifetime = new APIControl((IApplicationLifetime)host.Services.GetService(typeof(IApplicationLifetime)));
+            var lifetime = new APIControl((IHostApplicationLifetime)host.Services.GetService(typeof(IHostApplicationLifetime)));
             host.Start();
             return lifetime;
         }
@@ -44,9 +39,9 @@ namespace FSO.Server.Api.Core
 
     public class APIControl : IAPILifetime
     {
-        private IApplicationLifetime Lifetime;
+        private IHostApplicationLifetime Lifetime;
         
-        public APIControl(IApplicationLifetime lifetime)
+        public APIControl(IHostApplicationLifetime lifetime)
         {
             Lifetime = lifetime;
         }

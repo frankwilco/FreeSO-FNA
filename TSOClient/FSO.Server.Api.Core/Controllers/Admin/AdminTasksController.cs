@@ -1,15 +1,12 @@
 ﻿using FSO.Server.Api.Core.Utils;
 using FSO.Server.Database.DA.Tasks;
 using FSO.Server.Protocol.Gluon.Packets;
-using Newtonsoft.Json;
 using System;
 using System.Net;
-using System.Net.Http;
-using System.Web;
 using System.Linq;
-using System.Web.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Cors;
+using System.Text.Json;
 
 namespace FSO.Server.Api.Core.Controllers.Admin
 {
@@ -48,22 +45,20 @@ namespace FSO.Server.Api.Core.Controllers.Admin
             {
                 return ApiResponse.Json(HttpStatusCode.OK, -1);
             }
-            else
+
+            try
             {
-                try
+                var id = taskServer.Call(new RequestTask()
                 {
-                    var id = taskServer.Call(new RequestTask()
-                    {
-                        TaskType = task.task_type.ToString(),
-                        ParameterJson = JsonConvert.SerializeObject(task.parameter),
-                        ShardId = (task.shard_id == null || !task.shard_id.HasValue) ? -1 : task.shard_id.Value
-                    }).Result;
-                    return ApiResponse.Json(HttpStatusCode.OK, id);
-                }
-                catch (Exception ex)
-                {
-                    return ApiResponse.Json(HttpStatusCode.OK, -1);
-                }
+                    TaskType = task.task_type.ToString(),
+                    ParameterJson = JsonSerializer.Serialize(task.parameter),
+                    ShardId = (task.shard_id == null || !task.shard_id.HasValue) ? -1 : task.shard_id.Value
+                }).Result;
+                return ApiResponse.Json(HttpStatusCode.OK, id);
+            }
+            catch (Exception)
+            {
+                return ApiResponse.Json(HttpStatusCode.OK, -1);
             }
         }
     }

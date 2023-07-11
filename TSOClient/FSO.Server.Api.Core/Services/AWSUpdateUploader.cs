@@ -4,9 +4,7 @@ using Amazon.S3;
 using Amazon.S3.Model;
 using FSO.Server.Common.Config;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FSO.Server.Api.Core.Services
@@ -27,7 +25,6 @@ namespace FSO.Server.Api.Core.Services
             {
                 RegionEndpoint = RegionEndpoint.GetBySystemName(region),
                 Timeout = new TimeSpan(1, 0, 0),
-                ReadWriteTimeout = new TimeSpan(1, 0, 0),
                 MaxErrorRetry = 512
             };
 

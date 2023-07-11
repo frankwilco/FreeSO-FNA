@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
@@ -56,13 +54,15 @@ namespace FSO.Server.Api.Core.Controllers
 
         private string GetOauthLoginUrl()
         {
-            var rngCsp = new RNGCryptoServiceProvider();
             string csrf = "";
-            var random = new byte[24];
-            rngCsp.GetBytes(random);
-            for (int i=0; i<24; i++)
+            var randomNumber = new byte[24];
+            using (var rng = RandomNumberGenerator.Create())
             {
-                csrf += (char)('?' + random[i]/4);
+                rng.GetBytes(randomNumber);
+                for (int i = 0; i < 24; i++)
+                {
+                    csrf += (char)('?' + randomNumber[i] / 4);
+                }
             }
             CSRF = csrf;
 

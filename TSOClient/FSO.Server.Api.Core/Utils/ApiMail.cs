@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
-using System.Web;
 
 namespace FSO.Server.Api.Core.Utils
 {
@@ -69,7 +67,9 @@ namespace FSO.Server.Api.Core.Utils
                     client.SendMailAsync(message);
 
                     return true;
-                } catch(Exception e) {
+                }
+                catch (Exception)
+                {
                     return false;
                 }  
             }

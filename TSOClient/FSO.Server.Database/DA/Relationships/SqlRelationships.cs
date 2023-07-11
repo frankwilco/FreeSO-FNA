@@ -76,7 +76,7 @@ namespace FSO.Server.Database.DA.Relationships
                     cmd.CommandText = sCommand.ToString();
                     rows = cmd.ExecuteNonQuery();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return -1;
                 }

@@ -3,12 +3,8 @@ using FSO.Server.Database.DA.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Web;
+using System.Text.Json;
 using System.Xml;
 
 namespace FSO.Server.Api.Core.Utils
@@ -30,7 +26,7 @@ namespace FSO.Server.Api.Core.Utils
             return new ContentResult
             {
                 StatusCode = (int)code,
-                Content = Newtonsoft.Json.JsonConvert.SerializeObject(obj),
+                Content = JsonSerializer.Serialize(obj),
                 ContentType = "application/json"
             };
         }
@@ -43,7 +39,7 @@ namespace FSO.Server.Api.Core.Utils
             return new ContentResult
             {
                 StatusCode = (int)code,
-                Content = Newtonsoft.Json.JsonConvert.SerializeObject(list),
+                Content = JsonSerializer.Serialize(list),
                 ContentType = "application/json"
             };
         }

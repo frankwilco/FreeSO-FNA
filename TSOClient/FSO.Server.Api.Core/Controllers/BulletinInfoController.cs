@@ -1,13 +1,9 @@
 ﻿using FSO.Server.Api.Core.Utils;
-using FSO.Server.Common;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using FSO.Server.Database.DA.Bulletin;
 
 namespace FSO.Server.Api.Core.Controllers
@@ -18,14 +14,13 @@ namespace FSO.Server.Api.Core.Controllers
     {
         [HttpGet("nhoodId")]
         [Route("userapi/neighborhood/{nhoodId}/bulletins")]
-        public IActionResult GetByNhoodAndAfter(uint nhoodId, [FromQuery(Name = "after")]uint after)
+        public IActionResult GetByNhoodAndAfter(uint nhoodId, [FromQuery(Name = "after")]uint? after)
         {
             var api = Api.INSTANCE;
             
             using (var da = api.DAFactory.Get())
             {
-                if (after == null) after = 0;
-                var bulletins = da.BulletinPosts.GetByNhoodId(nhoodId, after);
+                var bulletins = da.BulletinPosts.GetByNhoodId(nhoodId, after.GetValueOrDefault(0));
                 if (bulletins == null) return ApiResponse.Json(HttpStatusCode.NotFound, new JSONBulletinError("Bulletins not found"));
 
                 List<JSONBulletin> bulletinJson = new List<JSONBulletin>();

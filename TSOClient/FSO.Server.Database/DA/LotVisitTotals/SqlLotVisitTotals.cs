@@ -18,7 +18,7 @@ namespace FSO.Server.Database.DA.LotVisitTotals
         {
             try {
                 Context.Connection.ExecuteBufferedInsert("INSERT INTO fso_lot_visit_totals (lot_id, date, minutes) VALUES (@lot_id, @date, @minutes) ON DUPLICATE KEY UPDATE minutes=VALUES(minutes)", input, 100);
-            }catch(Exception ex)
+            }catch (Exception)
             {
             }
         }

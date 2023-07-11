@@ -21,7 +21,8 @@ namespace FSO.Server.Database.DA.LotVisitors
                         lot_id = lot_id,
                         type = visitor_type.ToString()
                     }).First();
-            }catch(Exception ex){
+            }catch (Exception)
+            {
                 return null;
             }
         }
@@ -31,7 +32,8 @@ namespace FSO.Server.Database.DA.LotVisitors
             try
             {
                 Context.Connection.Query("UPDATE `fso_lot_visits` SET status = 'closed', time_closed = current_timestamp WHERE lot_visit_id = @visit_id AND `status` = 'active'", new { visit_id = visit_id });
-            }catch(Exception ex){
+            }catch (Exception)
+            {
             }
         }
 
@@ -39,7 +41,8 @@ namespace FSO.Server.Database.DA.LotVisitors
         {
             try{
                 Context.Connection.Query("UPDATE `fso_lot_visits` SET time_closed = current_timestamp WHERE lot_visit_id IN @visit_ids AND `status` = 'active'", new { visit_ids = visit_ids });
-            }catch (Exception ex){
+            }catch (Exception)
+            {
             }
         }
 

@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using FSO.Files.Utils;
 using FSO.Server.Common;
 using System.Diagnostics;
+using System.Text.Json;
+using System.Net.Http;
 
 namespace FSO.Server.Api.Core.Services
 {
@@ -86,6 +87,17 @@ namespace FSO.Server.Api.Core.Services
             return directories[0];
         }
 
+        private async void DownloadFile(String path, String filename)
+        {
+            var client = new HttpClient();
+            var pathUri = new Uri(path);
+            var response = await client.GetAsync(pathUri);
+            using (var fileStream = new FileStream(filename, FileMode.CreateNew))
+            {
+                await response.Content.CopyToAsync(fileStream);
+            }
+        }
+
         public async Task BuildUpdate(UpdateGenerationStatus status)
         {
             var request = status.Request;
@@ -122,7 +134,6 @@ namespace FSO.Server.Api.Core.Services
 
                     versionName = versionName.Replace('/', '-');
 
-                    var client = new WebClient();
                     //fetch artifacts
                     //http://servo.freeso.org/guestAuth/repository/download/FreeSO_TsoClient/.lastSuccessful/client-<>.zip
                     //http://servo.freeso.org/guestAuth/repository/download/FreeSO_TsoClient/.lastSuccessful/server-<>.zip
@@ -144,13 +155,13 @@ namespace FSO.Server.Api.Core.Services
                     if (branch.base_build_url != null)
                     {
                         status.UpdateStatus(UpdateGenerationStatusCode.DOWNLOADING_CLIENT);
-                        await client.DownloadFileTaskAsync(new Uri(branch.base_build_url), updateDir + "client.zip");
+                        DownloadFile(branch.base_build_url, updateDir + "client.zip");
                         clientArti = updateDir + "client.zip";
                     }
                     if (branch.base_server_build_url != null)
                     {
                         status.UpdateStatus(UpdateGenerationStatusCode.DOWNLOADING_SERVER);
-                        await client.DownloadFileTaskAsync(new Uri(branch.base_server_build_url), updateDir + "server.zip");
+                        DownloadFile(branch.base_server_build_url, updateDir + "server.zip");
                         serverArti = updateDir + "server.zip";
                     }
 
@@ -163,13 +174,13 @@ namespace FSO.Server.Api.Core.Services
                         if (addon.addon_zip_url != null)
                         {
                             status.UpdateStatus(UpdateGenerationStatusCode.DOWNLOADING_CLIENT_ADDON);
-                            await client.DownloadFileTaskAsync(new Uri(addon.addon_zip_url), updateDir + "clientAddon.zip");
+                            DownloadFile(addon.addon_zip_url, updateDir + "clientAddon.zip");
                             clientAddon = updateDir + "clientAddon.zip";
                         }
                         if (addon.server_zip_url != null)
                         {
                             status.UpdateStatus(UpdateGenerationStatusCode.DOWNLOADING_SERVER_ADDON);
-                            await client.DownloadFileTaskAsync(new Uri(addon.addon_zip_url), updateDir + "serverAddon.zip");
+                            DownloadFile(addon.addon_zip_url, updateDir + "serverAddon.zip");
                             serverAddon = updateDir + "serverAddon.zip";
                         }
                         else
@@ -217,7 +228,7 @@ namespace FSO.Server.Api.Core.Services
                             result.last_update_id = previousUpdate.update_id;
                             //calculate difference, generate an incremental update manifest + zip
                             var prevFile = updateDir + "prev.zip";
-                            await client.DownloadFileTaskAsync(new Uri(previousUpdate.full_zip), updateDir + "prev.zip");
+                            DownloadFile(previousUpdate.full_zip, updateDir + "prev.zip");
                             var prevZip = ZipFile.Open(prevFile, ZipArchiveMode.Read);
                             prevZip.ExtractToDirectory(updateDir + "prev/", true);
                             prevZip.Dispose();
@@ -268,7 +279,7 @@ namespace FSO.Server.Api.Core.Services
                         {
                             result.incremental_zip = await Api.INSTANCE.UpdateUploaderClient.UploadFile($"{baseUpdateKey}incremental-{versionName}.zip", diffZip, versionName);
                         }
-                        await System.IO.File.WriteAllTextAsync(updateDir + "manifest.json", Newtonsoft.Json.JsonConvert.SerializeObject(manifest));
+                        await File.WriteAllTextAsync(updateDir + "manifest.json", JsonSerializer.Serialize(manifest));
                         result.manifest_url = await Api.INSTANCE.UpdateUploaderClient.UploadFile($"{baseUpdateKey}{versionName}.json", updateDir + "manifest.json", versionName);
                     }
 

@@ -4,17 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Web.Http;
 using FSO.Server.Api.Core.Utils;
 using FSO.Common.Enum;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Cors;
-using FSO.Server.Database.DA.LotClaims;
 
 namespace FSO.Server.Api.Core.Controllers
 {
@@ -74,7 +69,8 @@ namespace FSO.Server.Api.Core.Controllers
                         return da.Lots.GetByLocation(shardid, ikey).lot_id;
                     }
                 });
-            } catch (NullReferenceException e)
+            }
+            catch (NullReferenceException)
             {
                 return null;
             }
@@ -98,7 +94,6 @@ namespace FSO.Server.Api.Core.Controllers
                 var lot = IDForLocation(shardid, id);
                 if (lot == null) return NotFound();
 
-                FileStream stream;
                 try
                 {
                     var ndat = System.IO.File.ReadAllBytes(Path.Combine(api.Config.NFSdir, "Lots/" + lot.Value.ToString("x8") + "/thumb.png"));
@@ -106,7 +101,7 @@ namespace FSO.Server.Api.Core.Controllers
 
                     return File(ndat, "image/png");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return NotFound();
                 }
@@ -500,7 +495,7 @@ namespace FSO.Server.Api.Core.Controllers
                     stream = System.IO.File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                     return File(stream, "application/octet-stream");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return NotFound();
                 }
@@ -525,7 +520,6 @@ namespace FSO.Server.Api.Core.Controllers
                 var lot = IDForLocation(shardid, id);
                 if (lot == null) return NotFound();
 
-                FileStream stream;
                 try
                 {
                     var path = Path.Combine(api.Config.NFSdir, "Lots/" + lot.Value.ToString("x8") + "/thumb.fsof");
@@ -534,7 +528,7 @@ namespace FSO.Server.Api.Core.Controllers
                     MemoryCacher.Add("lf" + shardid + ":" + id, ndat, DateTime.Now.Add(new TimeSpan(1, 0, 0)));
                     return File(ndat, "application/octet-stream");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return NotFound();
                 }
@@ -577,7 +571,7 @@ namespace FSO.Server.Api.Core.Controllers
                     stream.Write(data, 0, data.Length);
                     return Ok();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return NotFound();
                 }
