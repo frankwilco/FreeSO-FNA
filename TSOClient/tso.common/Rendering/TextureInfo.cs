@@ -20,7 +20,7 @@ namespace FSO.Common.Rendering
         {
             Size = new Point(width, height);
             Diff = new Point(tex.Width, tex.Height) - Size;
-            UVScale = Size.ToVector2() / new Vector2(tex.Width, tex.Height);
+            UVScale = new Vector2(Size.X / tex.Width, Size.Y / tex.Height);
         }
     }
 }

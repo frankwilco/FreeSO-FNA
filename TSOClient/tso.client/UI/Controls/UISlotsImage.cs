@@ -323,7 +323,7 @@ namespace FSO.Client.UI.Controls
         public override void Draw(UISpriteBatch spriteBatch)
         {
             if (Visible)
-                DrawLocalTexture(spriteBatch, TextureGenerator.GetPxWhite(spriteBatch.GraphicsDevice), null, new Vector2(), new Vector2(m_Width, m_Height), new Color(Color.Black, m_Alpha));
+                DrawLocalTexture(spriteBatch, TextureGenerator.GetPxWhite(spriteBatch.GraphicsDevice), null, new Vector2(), new Vector2(m_Width, m_Height), new Color(0, 0, 0, m_Alpha));
         }
 
     }

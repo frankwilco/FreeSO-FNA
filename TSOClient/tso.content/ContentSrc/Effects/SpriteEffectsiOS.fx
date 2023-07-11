@@ -1,4 +1,4 @@
-﻿#define SIMPLE 1
+#define SIMPLE 1
 #include "SpriteEffects.fx"
 
 float dummy() {

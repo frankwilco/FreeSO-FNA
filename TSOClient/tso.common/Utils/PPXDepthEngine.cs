@@ -45,7 +45,7 @@ namespace FSO.Common.Utils
 
         public static void SetPPXTarget(RenderTarget2D color, RenderTarget2D depth, bool clear)
         {
-            SetPPXTarget(color, depth, clear, Color.TransparentBlack);
+            SetPPXTarget(color, depth, clear, Color.Transparent);
         }
 
         public static void SetPPXTarget(RenderTarget2D color, RenderTarget2D depth, bool clear, Color clearColor)
@@ -162,11 +162,11 @@ namespace FSO.Common.Utils
             {
                 if (!WithOpacity)
                 {
-                    SB.Begin(blendState: BlendState.Opaque);
+                    SB.Begin(SpriteSortMode.Deferred, BlendState.Opaque);
                     opacity = 1;
                 }
                 else
-                    SB.Begin(blendState: BlendState.AlphaBlend);
+                    SB.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
                 SB.Draw(Backbuffer, new Vector2(Backbuffer.Width * (1 - scale) / 2, Backbuffer.Height * (1 - scale) / 2), null, Color.White * opacity, 0f, new Vector2(), scale,
                     SpriteEffects.None, 0);
                 SB.End();

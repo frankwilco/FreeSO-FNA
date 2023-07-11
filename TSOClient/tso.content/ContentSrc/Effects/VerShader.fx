@@ -1,4 +1,4 @@
-﻿//Vertex shader output structure
+//Vertex shader output structure
 struct VertexToPixel
 {
 	float4 VertexPosition : SV_Position0;
@@ -106,7 +106,7 @@ technique RenderCity
         VertexShader = compile vs_4_0_level_9_1 CityVS();
 #else
         VertexShader = compile vs_3_0 CityVS();
-#endif;
+#endif
 	}
 	
 	pass ShadowMap
@@ -115,7 +115,7 @@ technique RenderCity
         VertexShader = compile vs_4_0_level_9_1 ShadVS();
 #else
         VertexShader = compile vs_3_0 ShadVS();
-#endif;
+#endif
 	}
 	
 	pass FinalNoShad
@@ -124,7 +124,7 @@ technique RenderCity
         VertexShader = compile vs_4_0_level_9_1 CityNoShadVS();
 #else
         VertexShader = compile vs_3_0 CityNoShadVS();
-#endif;
+#endif
 	}
 	
 	pass FinalFog
@@ -133,7 +133,7 @@ technique RenderCity
 		VertexShader = compile vs_4_0_level_9_1 CityFogVS();
 #else
 		VertexShader = compile vs_3_0 CityFogVS();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -142,7 +142,7 @@ technique RenderCity
 		VertexShader = compile vs_4_0_level_9_1 CityFogVS();
 #else
 		VertexShader = compile vs_3_0 CityFogVS();
-#endif;
+#endif
 	}
 }
 
@@ -247,7 +247,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 CityObjVS();
 #else
 		VertexShader = compile vs_3_0 CityObjVS();
-#endif;
+#endif
 	}
 
 	pass ShadowMap
@@ -256,7 +256,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 ShadObjVS();
 #else
 		VertexShader = compile vs_3_0 ShadObjVS();
-#endif;
+#endif
 	}
 
 	pass FinalNoShad
@@ -265,7 +265,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 CityObjNoShadVS();
 #else
 		VertexShader = compile vs_3_0 CityObjNoShadVS();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -274,7 +274,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 CityObjFogVS();
 #else
 		VertexShader = compile vs_3_0 CityObjFogVS();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -283,7 +283,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 CityObjFogVS();
 #else
 		VertexShader = compile vs_3_0 CityObjFogVS();
-#endif;
+#endif
 	}
 
 	pass TreeVS
@@ -292,7 +292,7 @@ technique RenderCityObj
 		VertexShader = compile vs_4_0_level_9_1 TreeVS();
 #else
 		VertexShader = compile vs_3_0 TreeVS();
-#endif;
+#endif
 	}
 }
 
@@ -377,7 +377,7 @@ technique RenderNCity
 		VertexShader = compile vs_4_0_level_9_1 NCityVS();
 #else
 		VertexShader = compile vs_3_0 NCityVS();
-#endif;
+#endif
 	}
 
 	pass ShadowMap
@@ -386,7 +386,7 @@ technique RenderNCity
 		VertexShader = compile vs_4_0_level_9_1 NShadVS();
 #else
 		VertexShader = compile vs_3_0 NShadVS();
-#endif;
+#endif
 	}
 
 	pass FinalNoShad
@@ -395,7 +395,7 @@ technique RenderNCity
 		VertexShader = compile vs_4_0_level_9_1 NCityNoShadVS();
 #else
 		VertexShader = compile vs_3_0 NCityNoShadVS();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -404,7 +404,7 @@ technique RenderNCity
 		VertexShader = compile vs_4_0_level_9_1 NCityFogVS();
 #else
 		VertexShader = compile vs_3_0 NCityFogVS();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -413,7 +413,7 @@ technique RenderNCity
 		VertexShader = compile vs_4_0_level_9_1 NCityFogVS();
 #else
 		VertexShader = compile vs_3_0 NCityFogVS();
-#endif;
+#endif
 	}
 }
 
@@ -458,7 +458,7 @@ technique RenderCitySpr
 		VertexShader = compile vs_4_0_level_9_1 CitySprVS();
 #else
 		VertexShader = compile vs_3_0 CitySprVS();
-#endif;
+#endif
 	}
 
 	pass ShadowMap //unused
@@ -467,7 +467,7 @@ technique RenderCitySpr
 		VertexShader = compile vs_4_0_level_9_1 ShadObjVS();
 #else
 		VertexShader = compile vs_3_0 ShadObjVS();
-#endif;
+#endif
 	}
 
 	pass FinalNoShad
@@ -476,7 +476,7 @@ technique RenderCitySpr
 		VertexShader = compile vs_4_0_level_9_1 CitySprNoShadVS();
 #else
 		VertexShader = compile vs_3_0 CitySprNoShadVS();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -485,7 +485,7 @@ technique RenderCitySpr
 		VertexShader = compile vs_4_0_level_9_1 CitySprFogVS();
 #else
 		VertexShader = compile vs_3_0 CitySprFogVS();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -494,6 +494,6 @@ technique RenderCitySpr
 		VertexShader = compile vs_4_0_level_9_1 CitySprFogVS();
 #else
 		VertexShader = compile vs_3_0 CitySprFogVS();
-#endif;
+#endif
 	}
 }

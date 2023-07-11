@@ -54,20 +54,26 @@ namespace FSO.Client.UI.Framework
         {
             End();
             var mat = (BatchMatrixStack.Count > 0) ? BatchMatrixStack.Peek() : (Matrix?)null;
-            if (mat != null)
-                Begin(transformMatrix: mat, rasterizerState: RasterizerState.CullNone, effect: effect);
-            else
-                Begin(rasterizerState: RasterizerState.CullNone, effect: effect);
+            Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.LinearClamp,
+                DepthStencilState.None,
+                RasterizerState.CullNone,
+                effect,
+                mat.GetValueOrDefault(Matrix.Identity));
         }
 
         public void SetEffect()
         {
             End();
             var mat = (BatchMatrixStack.Count > 0) ? BatchMatrixStack.Peek() : (Matrix?)null;
-            if (mat != null)
-                Begin(transformMatrix: mat, rasterizerState: RasterizerState.CullNone);
-            else
-                Begin(rasterizerState: RasterizerState.CullNone);
+            Begin(SpriteSortMode.Deferred,
+                BlendState.AlphaBlend,
+                SamplerState.LinearClamp,
+                DepthStencilState.None,
+                RasterizerState.CullNone,
+                null,
+                mat.GetValueOrDefault(Matrix.Identity));
         }
 
         private int _Width;

@@ -38,7 +38,7 @@ namespace FSO.UI.Utils
             var oldRts = gd.GetRenderTargets();
             gd.SetRenderTarget(result);
             gd.Clear(Color.Black);
-            sb.Begin(blendState: BlendState.AlphaBlend);
+            sb.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend);
             var minScale = Math.Min(37f/newAgain.Width, 37f/newAgain.Height);
             if (minScale > 1) minScale = 1;
             var rect = new Rectangle(

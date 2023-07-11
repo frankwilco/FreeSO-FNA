@@ -293,10 +293,10 @@ namespace FSO.Client.UI.Screens
             
             if (state.WindowFocused && state.InputManager.GetFocus() == null)
             {
-                if (state.NewKeys.Contains(Keys.D1) || (state.KeyboardState.NumLock && state.NewKeys.Contains(Keys.NumPad1))) ChangeSpeedTo(1);
-                else if (state.NewKeys.Contains(Keys.D2) || (state.KeyboardState.NumLock && state.NewKeys.Contains(Keys.NumPad2))) ChangeSpeedTo(2);
-                else if (state.NewKeys.Contains(Keys.D3) || (state.KeyboardState.NumLock && state.NewKeys.Contains(Keys.NumPad3))) ChangeSpeedTo(3);
-                else if (state.NewKeys.Contains(Keys.P) || state.NewKeys.Contains(Keys.D0) || (state.KeyboardState.NumLock && state.NewKeys.Contains(Keys.NumPad0))) ChangeSpeedTo(0);
+                if (state.NewKeys.Contains(Keys.D1) || (state.InputManager.NumLockActive && state.NewKeys.Contains(Keys.NumPad1))) ChangeSpeedTo(1);
+                else if (state.NewKeys.Contains(Keys.D2) || (state.InputManager.NumLockActive && state.NewKeys.Contains(Keys.NumPad2))) ChangeSpeedTo(2);
+                else if (state.NewKeys.Contains(Keys.D3) || (state.InputManager.NumLockActive && state.NewKeys.Contains(Keys.NumPad3))) ChangeSpeedTo(3);
+                else if (state.NewKeys.Contains(Keys.P) || state.NewKeys.Contains(Keys.D0) || (state.InputManager.NumLockActive && state.NewKeys.Contains(Keys.NumPad0))) ChangeSpeedTo(0);
             }
 
             if (World != null)

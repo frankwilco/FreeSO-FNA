@@ -163,7 +163,11 @@ namespace FSO.Client.UI.Panels
         public void UpdateDesiredPosition()
         {
             DesiredRectPos = new Point((int)(TargetPt.X - DisplayRect.Width / 2), (int)(TargetPt.Y - (DisplayRect.Height + 20)));
-            var dr = new Rectangle(DesiredRectPos, new Point(DisplayRect.Width, DisplayRect.Height)); 
+            var dr = new Rectangle(
+                DesiredRectPos.X,
+                DesiredRectPos.Y,
+                DisplayRect.Width,
+                DisplayRect.Height); 
 
             bool changed = false;
             foreach (var area in Owner.GetInvalid(this))

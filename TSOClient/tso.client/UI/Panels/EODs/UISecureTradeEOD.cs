@@ -608,8 +608,13 @@ namespace FSO.Client.UI.Panels.EODs
         {
             if (prev.MoneyOffer != now.MoneyOffer)
             {
+                var newRect = new Rectangle(
+                    (int)position.X + (Small800 ? 229 : 453),
+                    (int)position.Y + 7,
+                    102,
+                    29);
                 //money changed
-                NotifyRects.Add(new Tuple<Rectangle, float>(new Rectangle(position.ToPoint() + new Point((Small800)?229:453, 7), new Point(102, 29)), 1.0f));
+                NotifyRects.Add(new Tuple<Rectangle, float>(newRect, 1.0f));
             }
 
             for (int i=0; i<5; i++)
@@ -618,7 +623,12 @@ namespace FSO.Client.UI.Panels.EODs
                 var nobj = now.ObjectOffer[i];
                 if (((nobj == null) != (pobj == null)) || (nobj != null && (nobj.GUID != pobj.GUID || nobj.PID != pobj.PID)))
                 {
-                    NotifyRects.Add(new Tuple<Rectangle, float>(new Rectangle(position.ToPoint() + new Point(i*45+1, 2), new Point(43, 43)), 1.0f));
+                    var newRect = new Rectangle(
+                        (int)position.X + (i * 45 + 1),
+                        (int)position.Y + 2,
+                        43,
+                        43);
+                    NotifyRects.Add(new Tuple<Rectangle, float>(newRect, 1.0f));
                 }
             }
         }

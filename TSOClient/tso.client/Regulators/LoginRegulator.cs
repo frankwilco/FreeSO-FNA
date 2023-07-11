@@ -90,12 +90,13 @@ namespace FSO.Client.Regulators
                             var cdnurl = connectResult.UserAuthorized.FSOCDNUrl;
                             if (cdnurl != null)
                                 ApiClient.CDNUrl = cdnurl;
-
+#if !DEBUG
                             if (RequireUpdate(connectResult.UserAuthorized) && !FSOEnvironment.SoftwareKeyboard)
                             {
                                 AsyncTransition("UpdateRequired", connectResult.UserAuthorized);
                             }
                             else
+#endif
                             {
                                 AsyncTransition("AvatarData");
                             }

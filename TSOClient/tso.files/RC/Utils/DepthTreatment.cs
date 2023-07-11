@@ -44,7 +44,11 @@ namespace FSO.Files.RC.Utils
                 effect.CurrentTechnique = effect.Techniques["DerivativeDepth"];
                 effect.Parameters["pixelSize"].SetValue(new Vector2(1f / depthIn.Width, 1f / depthIn.Height));
 
-                Batch.Begin(rasterizerState: RasterizerState.CullNone, effect: effect);
+                Batch.Begin(SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.LinearClamp,
+                    DepthStencilState.None,
+                    RasterizerState.CullNone, effect);
                 Batch.Draw(depthIn, Vector2.Zero, Color.White);
                 Batch.End();
 
@@ -52,7 +56,11 @@ namespace FSO.Files.RC.Utils
 
                 effect.CurrentTechnique = effect.Techniques["DequantizeDepth"];
 
-                Batch.Begin(rasterizerState: RasterizerState.CullNone, effect: effect);
+                Batch.Begin(SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.LinearClamp,
+                    DepthStencilState.None,
+                    RasterizerState.CullNone, effect);
                 Batch.Draw(targetPrep, Vector2.Zero, Color.White);
                 Batch.End();
                 

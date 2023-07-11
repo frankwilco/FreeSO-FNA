@@ -40,7 +40,7 @@ technique Draw2D
 #else
         VertexShader = compile vs_3_0 VertexShaderFunction();
         PixelShader = compile ps_3_0 PixelShaderFunction();
-#endif;
+#endif
 
     }
 }

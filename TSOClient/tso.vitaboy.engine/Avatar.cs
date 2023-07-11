@@ -358,7 +358,7 @@ namespace FSO.Vitaboy
                 device.DepthStencilState = DepthStencilState.DepthRead;
                 device.SetVertexBuffer(ShadBuf);
                 device.Indices = ShadIBuf;
-                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 4);
+                device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, 4);
                 effect.CurrentTechnique = oldTech;
                 device.DepthStencilState = DepthStencilState.Default;
             }
@@ -396,7 +396,7 @@ namespace FSO.Vitaboy
                     //if (i != 1) device.RasterizerState = RasterizerState.CullClockwise;
                     device.SetVertexBuffer(item.Value.Verts);
                     device.Indices = item.Value.Indices;
-                    device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, item.Value.PrimCount);
+                    device.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, item.Value.PrimCount);
                     //if (i != 1) device.RasterizerState = RasterizerState.CullCounterClockwise;
                 }
             }

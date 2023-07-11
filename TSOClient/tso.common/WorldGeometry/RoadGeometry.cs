@@ -285,7 +285,7 @@ namespace FSO.Common.WorldGeometry
                 }
 
                 var ind = mesh.Vertices.Count;
-                var pos = rect.Rect.Location.ToVector2() - off + rect.Offset;
+                var pos = new Vector2(rect.Rect.Location.X, rect.Rect.Location.Y) - off + rect.Offset;
                 var tcOff = off + new Vector2(0.5f, 0f) - rect.Offset;
                 var pos2 = xm * pos.X + ym * pos.Y + ctr;
                 mesh.Vertices.Add(new MeshPoint(new Vector3(pos2.X, 0, pos2.Y), FloorTC(pos + tcOff)));

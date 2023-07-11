@@ -251,8 +251,9 @@ namespace FSO.LotView.Components
                         ((int)headPx.X - Headline.Width / 2) + (int)off.X,
                         ((int)headPx.Y - Headline.Height / 2) + (int)off.Y, Headline.Width, Headline.Height);
 
+                    var screenCoords = world.WorldSpace.GetScreenFromTile(pos);
                     HeadlineSprite.AbsoluteDestRect = HeadlineSprite.DestRect;
-                    HeadlineSprite.AbsoluteDestRect.Offset(world.WorldSpace.GetScreenFromTile(pos));
+                    HeadlineSprite.AbsoluteDestRect.Offset(new Point((int)screenCoords.X, (int)screenCoords.Y));
                     HeadlineSprite.AbsoluteWorldPosition = HeadlineSprite.WorldPosition + WorldSpace.GetWorldFromTile(pos);
 
                     HeadlineSprite.Room = Room;

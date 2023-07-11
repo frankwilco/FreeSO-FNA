@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using FSO.Common.Rendering.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace FSO.Vitaboy
 {
@@ -69,7 +70,7 @@ namespace FSO.Vitaboy
             this.Update(state.Time);
         }
 
-        public override void Draw(Microsoft.Xna.Framework.Graphics.GraphicsDevice device)
+        public override void Draw(GraphicsDevice device)
         {
         }
 

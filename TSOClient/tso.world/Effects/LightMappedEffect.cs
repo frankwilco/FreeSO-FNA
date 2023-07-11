@@ -92,9 +92,6 @@ namespace FSO.LotView.Effects
         {
         }
 
-        public LightMappedEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-        }
 
         public LightMappedEffect(Effect cloneSource) : base(cloneSource)
         {

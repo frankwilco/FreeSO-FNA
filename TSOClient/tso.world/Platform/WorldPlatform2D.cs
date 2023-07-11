@@ -134,7 +134,7 @@ namespace FSO.LotView.Platform
             var oldDS = gd.DepthStencilState;
             gd.DepthStencilState = DepthStencilState.Default;
 
-            state.WorldRectangle = new Rectangle((-pxOffset).ToPoint(), new Point(1, 1));
+            state.WorldRectangle = new Rectangle((int)-pxOffset.X, (int)-pxOffset.Y, 1, 1);
             
             state._2D.OBJIDMode = true;
             using (var buffer = _2d.WithBuffer(_2DWorldBatch.BUFFER_OBJID, ref bufferTexture))
@@ -250,7 +250,10 @@ namespace FSO.LotView.Platform
                         var offBound = obj.Bounding;
                         if (offBound.Width != 0)
                         {
-                            offBound.Offset(pxOffset + thumbOffset);
+                            offBound.Offset(new Point(
+                                (int)(pxOffset.X + thumbOffset.X),
+                                (int)(pxOffset.Y + thumbOffset.Y)
+                            ));
 
                             if (offBound.Location.X != int.MaxValue)
                             {

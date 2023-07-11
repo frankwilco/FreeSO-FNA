@@ -151,10 +151,6 @@ namespace FSO.LotView.Effects
         {
         }
 
-        public WorldBatchEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-        }
-
         public WorldBatchEffect(Effect cloneSource) : base(cloneSource)
         {
         }

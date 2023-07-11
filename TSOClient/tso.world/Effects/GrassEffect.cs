@@ -396,10 +396,6 @@ namespace FSO.LotView.Effects
         {
         }
 
-        public GrassEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-        }
-
         protected override void PrepareParams()
         {
             base.PrepareParams();

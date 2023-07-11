@@ -64,7 +64,7 @@ namespace FSO.SimAntics.Utils
             if (phone != null && TargetSize != 0)
             {
                 //determine lot alignment
-                var dirDiff = new Point(phone.X, phone.Y) - new Point(model.Size / 2);
+                var dirDiff = new Point(phone.X, phone.Y) - new Point(model.Size / 2, model.Size / 2);
                 // (atan result) 1 is default, 2 is 90 clockwise
                 var dir = (int)(Math.Round(Math.Atan2(dirDiff.Y, dirDiff.X) / (Math.PI / 2)) + 3) % 4;
 

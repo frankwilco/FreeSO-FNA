@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,10 +14,43 @@ namespace FSO.Files.Utils
 {
     public static class CurLoader
     {
-        public static MouseCursor LoadMonoCursor(GraphicsDevice gd, Stream stream)
+        private static IntPtr GetHandleFromTexture2D(Texture2D texture, int originx, int originy)
+        {
+            IntPtr surface = IntPtr.Zero;
+            IntPtr handle = IntPtr.Zero;
+            IntPtr bytesHandle = IntPtr.Zero;
+            try
+            {
+                var bytes = new byte[texture.Width * texture.Height * 4];
+                texture.GetData(bytes);
+
+                Marshal.StructureToPtr(texture, bytesHandle, true);
+                surface = SDL.SDL_CreateRGBSurfaceFrom(bytesHandle, texture.Width, texture.Height, 32, texture.Width * 4, 0x000000ff, 0x0000FF00, 0x00FF0000, 0xFF000000);
+                if (surface == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException("Failed to create surface for mouse cursor: " + SDL.SDL_GetError());
+                }
+
+                handle = SDL.SDL_CreateColorCursor(surface, originx, originy);
+                if (handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException("Failed to set surface for mouse cursor: " + SDL.SDL_GetError());
+                }
+            }
+            finally
+            {
+                if (surface != IntPtr.Zero)
+                {
+                    SDL.SDL_FreeSurface(surface);
+                }
+            }
+            return handle;
+        }
+
+        public static IntPtr LoadMonoCursor(GraphicsDevice gd, Stream stream)
         {
             var cur = LoadCursor(gd, stream);
-            return MouseCursor.FromTexture2D(cur.Item1, cur.Item2.X, cur.Item2.Y);
+            return GetHandleFromTexture2D(cur.Item1, cur.Item2.X, cur.Item2.Y);
         }
 
         public static Tuple<Texture2D, Point> LoadCursor(GraphicsDevice gd, Stream stream)

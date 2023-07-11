@@ -306,7 +306,7 @@ namespace FSO.LotView.Components
                         //e.CurrentTechnique.Passes[2].Apply();
                         pass.Apply();
                         gd.SamplerStates[0] = CustomWrap;
-                        gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, mdl.PrimitiveCount);
+                        gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, mdl.PrimitiveCount);
                         gd.SetVertexBuffer(Bp.Terrain.VertexBuffer);
 
                         e.TexMatrix = tmat;
@@ -364,7 +364,7 @@ namespace FSO.LotView.Components
 
                                     //quickly draw under the water
                                     pass.Apply();
-                                    gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, type.Value.GeomForOffset.Count * 2);
+                                    gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, type.Value.GeomForOffset.Count * 2);
 
                                     e.UseTexture = true;
                                     e.IgnoreColor = true;
@@ -467,7 +467,7 @@ namespace FSO.LotView.Components
                         //Monogame then thinks the texture is wrapping.
                         gd.SamplerStates[buggedTex] = CustomWrap;
                     }
-                    gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, type.Value.GeomForOffset.Count * 2);
+                    gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, type.Value.GeomForOffset.Count * 2);
 
                     if (id == 0)
                     {

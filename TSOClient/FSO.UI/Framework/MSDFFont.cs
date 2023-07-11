@@ -91,7 +91,8 @@ namespace FSO.UI.Framework
                 scale.Y = scale2.Y;
             }
 
-            var wvp = wv * Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, gd.Viewport.Width, gd.Viewport.Height), -0.1f, 1f);
+            var wvpRect = new Rectangle(0, 0, gd.Viewport.Width, gd.Viewport.Height);
+            var wvp = wv * Matrix.CreateOrthographicOffCenter(wvpRect.Left, wvpRect.Right, wvpRect.Bottom, wvpRect.Top, -0.1f, 1f);
             var effect = MSDFEffect;
 
             var groups = new Dictionary<MSDFFont, MSDFRenderGroup>();

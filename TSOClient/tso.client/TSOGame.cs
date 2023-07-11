@@ -33,6 +33,7 @@ using MSDFData;
 using FSO.Common.Audio;
 using System.Linq;
 using FSO.LotView.Model;
+using Microsoft.Xna.Framework.Input;
 
 namespace FSO.Client
 {
@@ -65,7 +66,7 @@ namespace FSO.Client
                 Graphics.PreferredDepthStencilFormat = DepthFormat.Depth24Stencil8;
                 TargetElapsedTime = new TimeSpan(10000000 / GlobalSettings.Default.TargetRefreshRate);
                 FSOEnvironment.RefreshRate = GlobalSettings.Default.TargetRefreshRate;
-                Graphics.HardwareModeSwitch = false;
+                //Graphics.HardwareModeSwitch = false;
                 Graphics.ApplyChanges();
             }
 
@@ -273,17 +274,17 @@ namespace FSO.Client
         /// <summary>
         /// Run this instance with GameRunBehavior forced as Synchronous.
         /// </summary>
-        public new void Run()
-        {
-             Run(GameRunBehavior.Synchronous);
-        }
+        //public new void Run()
+        //{
+             //Run(GameRunBehavior.Synchronous);
+        //}
 
         /// <summary>
         /// Only used on desktop targets. Use extensive reflection to AVOID linking on iOS!
         /// </summary>
         void AddTextInput()
         {
-            this.Window.GetType().GetEvent("TextInput")?.AddEventHandler(this.Window, (EventHandler<TextInputEventArgs>)GameScreen.TextInput);
+            TextInputEXT.TextInput += GameScreen.TextInput;
         }
 
         void RegainFocus(object sender, EventArgs e)
@@ -315,7 +316,9 @@ namespace FSO.Client
         protected override void LoadContent()
         {
             Effect vitaboyEffect = null;
+#if !DEBUG
             try
+#endif
             {
                 /*
                 GameFacade.MainFont = new FSO.Client.UI.Framework.Font();
@@ -335,18 +338,20 @@ namespace FSO.Client
                 GameFacade.EdithVectorFont.VectorScale = 0.366f;
                 GameFacade.EdithVectorFont.Height = 15;
                 GameFacade.EdithVectorFont.YOff = 11;
+                
                 MSDFFont.MSDFEffect = Content.Load<Effect>("Effects/MSDFFont");
 
                 vitaboyEffect = Content.Load<Effect>((FSOEnvironment.GLVer == 2)?"Effects/VitaboyiOS":"Effects/Vitaboy");
                 uiLayer = new UILayer(this);
             }
+#if !DEBUG
             catch (Exception e)
             {
                 FSOProgram.ShowDialog("Content could not be loaded. Make sure that the FreeSO content has been compiled! (ContentSrc/TSOClientContent.mgcb) \r\n\r\n"+e.ToString());
                 Exit();
                 Environment.Exit(0);
             }
-            
+#endif
             FSO.Vitaboy.Avatar.setVitaboyEffect(vitaboyEffect);
         }
 

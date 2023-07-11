@@ -84,10 +84,6 @@ namespace FSO.LotView.Effects
         {
         }
 
-        public SpriteEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-        }
-
         public SpriteEffect(Effect cloneSource) : base(cloneSource)
         {
         }

@@ -160,7 +160,7 @@ namespace FSO.Vitaboy
             if (!GPUMode) StoreOnGPU(gd);
             gd.Indices = GPUIndexBuffer;
             gd.SetVertexBuffer(GPUVertexBuffer);
-            gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, NumPrimitives);
+            gd.DrawIndexedPrimitives(PrimitiveType.TriangleList, 0, 0, 0, 0, NumPrimitives);
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿#include "LightingCommon.fx"
+#include "LightingCommon.fx"
 
 //Vertex shader output structure
 struct VertexToPixel
@@ -189,7 +189,7 @@ technique RenderCity
         PixelShader = compile ps_4_0_level_9_3 CityPS();
 #else
         PixelShader = compile ps_3_0 CityPS();
-#endif;
+#endif
 	}
 	
 	pass ShadowMap
@@ -198,7 +198,7 @@ technique RenderCity
         PixelShader = compile ps_4_0_level_9_1 ShadowMapPS();
 #else
         PixelShader = compile ps_3_0 ShadowMapPS();
-#endif;
+#endif
 	}
 	
 	pass FinalNoShadow
@@ -207,7 +207,7 @@ technique RenderCity
         PixelShader = compile ps_4_0_level_9_1 CityPSNoShad();
 #else
         PixelShader = compile ps_3_0 CityPSNoShad();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -216,7 +216,7 @@ technique RenderCity
 		PixelShader = compile ps_4_0_level_9_1 CityPSFog();
 #else
 		PixelShader = compile ps_3_0 CityPSFog();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -225,7 +225,7 @@ technique RenderCity
 		PixelShader = compile ps_4_0_level_9_3 CityPSFogShad();
 #else
 		PixelShader = compile ps_3_0 CityPSFogShad();
-#endif;
+#endif
 	}
 	//
 }
@@ -320,7 +320,7 @@ technique RenderCityObj
 		PixelShader = compile ps_4_0_level_9_3 CityObjPS();
 #else
 		PixelShader = compile ps_3_0 CityObjPS();
-#endif;
+#endif
 	}
 
 	pass ShadowMap
@@ -329,7 +329,7 @@ technique RenderCityObj
 		PixelShader = compile ps_4_0_level_9_1 ObjShadowMapPS();
 #else
 		PixelShader = compile ps_3_0 ObjShadowMapPS();
-#endif;
+#endif
 	}
 
 	pass FinalNoShadow
@@ -338,7 +338,7 @@ technique RenderCityObj
 		PixelShader = compile ps_4_0_level_9_1 CityObjPSNoShad();
 #else
 		PixelShader = compile ps_3_0 CityObjPSNoShad();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -347,7 +347,7 @@ technique RenderCityObj
 		PixelShader = compile ps_4_0_level_9_1 CityObjPSFog();
 #else
 		PixelShader = compile ps_3_0 CityObjPSFog();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -356,7 +356,7 @@ technique RenderCityObj
 		PixelShader = compile ps_4_0_level_9_3 CityObjPSFogShad();
 #else
 		PixelShader = compile ps_3_0 CityObjPSFogShad();
-#endif;
+#endif
 	}
 	//
 }
@@ -450,7 +450,7 @@ pass Final
 	PixelShader = compile ps_4_0_level_9_3 NCityPS();
 #else
 	PixelShader = compile ps_3_0 NCityPS();
-#endif;
+#endif
 }
 
 pass ShadowMap
@@ -459,7 +459,7 @@ pass ShadowMap
 	PixelShader = compile ps_4_0_level_9_1 ShadowMapPS();
 #else
 	PixelShader = compile ps_3_0 ShadowMapPS();
-#endif;
+#endif
 }
 
 pass FinalNoShadow
@@ -468,7 +468,7 @@ pass FinalNoShadow
 	PixelShader = compile ps_4_0_level_9_1 NCityPSNoShad();
 #else
 	PixelShader = compile ps_3_0 NCityPSNoShad();
-#endif;
+#endif
 }
 
 pass FinalFog
@@ -477,7 +477,7 @@ pass FinalFog
 	PixelShader = compile ps_4_0_level_9_1 NCityPSFog();
 #else
 	PixelShader = compile ps_3_0 NCityPSFog();
-#endif;
+#endif
 }
 
 pass FinalFogShadow
@@ -486,7 +486,7 @@ pass FinalFogShadow
 	PixelShader = compile ps_4_0_level_9_3 NCityPSFogShad();
 #else
 	PixelShader = compile ps_3_0 NCityPSFogShad();
-#endif;
+#endif
 }
 //
 }
@@ -606,7 +606,7 @@ technique RenderWCity
 		PixelShader = compile ps_4_0_level_9_3 WCityPS();
 #else
 		PixelShader = compile ps_3_0 WCityPS();
-#endif;
+#endif
 	}
 
 	pass ShadowMap
@@ -615,7 +615,7 @@ technique RenderWCity
 		PixelShader = compile ps_4_0_level_9_3 ShadowMapPS();
 #else
 		PixelShader = compile ps_3_0 ShadowMapPS();
-#endif;
+#endif
 	}
 
 	pass FinalNoShadow
@@ -624,7 +624,7 @@ technique RenderWCity
 		PixelShader = compile ps_4_0_level_9_3 WCityPSNoShad();
 #else
 		PixelShader = compile ps_3_0 WCityPSNoShad();
-#endif;
+#endif
 	}
 
 	pass FinalFog
@@ -633,7 +633,7 @@ technique RenderWCity
 		PixelShader = compile ps_4_0_level_9_3 WCityPSFog();
 #else
 		PixelShader = compile ps_3_0 WCityPSFog();
-#endif;
+#endif
 	}
 
 	pass FinalFogShadow
@@ -642,7 +642,7 @@ technique RenderWCity
 		PixelShader = compile ps_4_0_level_9_3 WCityPSFogShad();
 #else
 		PixelShader = compile ps_3_0 WCityPSFogShad();
-#endif;
+#endif
 	}
 	//
 }
@@ -661,6 +661,6 @@ technique NeighHighlight
 		PixelShader = compile ps_4_0_level_9_1 NeighHighlightPS();
 #else
 		PixelShader = compile ps_3_0 NeighHighlightPS();
-#endif;
+#endif
 	}
 }

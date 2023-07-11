@@ -500,7 +500,7 @@ namespace FSO.LotView.Components
                     ((int)headPx.Y - Headline.Height / 2) + (int)off.Y, Headline.Width, Headline.Height);
 
                 item.AbsoluteDestRect = item.DestRect;
-                item.AbsoluteDestRect.Offset(world.WorldSpace.GetScreenFromTile(pos));
+                item.AbsoluteDestRect.Offset(world.WorldSpace.GetScreenFromTile(pos).ToPoint());
                 item.AbsoluteWorldPosition = item.WorldPosition + WorldSpace.GetWorldFromTile(pos);
                 HeadlineSprite.PrepareVertices(device);
                 world._2D.DrawImmediate(item);

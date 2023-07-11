@@ -241,7 +241,7 @@ namespace FSO.LotView.Utils
                 Rectangle? bounding = null;
                 foreach (var item in Items) {
                     item.Sprite.AbsoluteDestRect = item.Sprite.DestRect;
-                    item.Sprite.AbsoluteDestRect.Offset(world.WorldSpace.GetScreenFromTile(_Position));
+                    item.Sprite.AbsoluteDestRect.Offset(world.WorldSpace.GetScreenFromTile(_Position).ToPoint());
                     if (bounding == null) bounding = item.Sprite.AbsoluteDestRect;
                     else bounding = Rectangle.Union(bounding.Value, item.Sprite.AbsoluteDestRect);
                     item.Sprite.AbsoluteWorldPosition = item.Sprite.WorldPosition + WorldSpace.GetWorldFromTile(_Position);

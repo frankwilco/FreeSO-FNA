@@ -17,7 +17,7 @@ namespace FSO.Client.UI.Framework
         protected RenderTarget2D Target;
         public UIContainer DynamicOverlay = new UIContainer();
         public Point BackOffset;
-        public Color ClearColor = Color.TransparentBlack;
+        public Color ClearColor = Color.Transparent;
         public bool UseMip;
         public bool UseZ;
         public bool InternalBefore;
@@ -74,7 +74,8 @@ namespace FSO.Client.UI.Framework
 
                 batch.BatchMatrixStack.Push(mat);
 
-                batch.Begin(transformMatrix: mat, blendState: BlendState.AlphaBlend, sortMode: SpriteSortMode.Deferred, rasterizerState: RasterizerState.CullNone);
+                batch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp,
+                    DepthStencilState.None, RasterizerState.CullNone, null, mat);
                 batch.GraphicsDevice.RasterizerState = RasterizerState.CullNone;
                 if (InternalBefore) InternalDraw(batch);
                 lock (Children)

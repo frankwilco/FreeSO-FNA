@@ -163,7 +163,7 @@ namespace FSO.Client.Rendering.City.Plugins
 
         private void AddChange(Point pos)
         {
-            var rect = new Rectangle(pos, new Point(1, 1));
+            var rect = new Rectangle(pos.X, pos.Y, 1, 1);
             AddChange(rect);
         }
 

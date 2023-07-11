@@ -237,7 +237,7 @@ namespace FSO.SimAntics.Engine
         private List<VMObstacle> CollisionTest(VMObstacleSet obstacles, int x, int z)
         {
             Point point = new Point(x / PRECISION, z / PRECISION);
-            return obstacles.AllIntersect(new VMObstacle(point - new Point(1), point + new Point(1)));
+            return obstacles.AllIntersect(new VMObstacle(point - new Point(1, 1), point + new Point(1, 1)));
         }
 
         private bool TryMove(VMObstacleSet obstacles, ref VMDirectControlState state, int framePredict)

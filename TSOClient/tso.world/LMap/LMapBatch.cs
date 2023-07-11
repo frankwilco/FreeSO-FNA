@@ -159,12 +159,20 @@ namespace FSO.LotView.LMap
 
             Dispose();
 
-            ShadowTarg = new RenderTarget2D(GD, wl, wh, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-            ObjShadowTarg = new RenderTarget2D(GD, (ultra)?(wl*2):wl, (ultra)?(wh*2):wh, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
-            LightMap = new RenderTarget2D(GD, (wl * 3), (wh * 2), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents); //just ground floor for now.
+            ShadowTarg = new RenderTarget2D(
+                GD, wl, wh, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            ObjShadowTarg = new RenderTarget2D(
+                GD, (ultra)?(wl*2):wl, (ultra)?(wh*2):wh, false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            LightMap = new RenderTarget2D(
+                GD, (wl * 3), (wh * 2), false, SurfaceFormat.Color, DepthFormat.None, 0, RenderTargetUsage.PreserveContents); //just ground floor for now.
             ShadowTargBlit = new SpriteBatch(GD);
-            Projection = Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, (w - borderSize) * 16, (h - borderSize) * 16), -10, 10);
-            if (directional) LightMapDirection = new RenderTarget2D(GD, (w - borderSize)*3*4, (h - borderSize)*2*4, false, SurfaceFormat.HalfVector4, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
+            var projectionRect = new Rectangle(0, 0, (w - borderSize) * 16, (h - borderSize) * 16);
+            Projection = Matrix.CreateOrthographicOffCenter(
+                projectionRect.Left, projectionRect.Right,
+                projectionRect.Bottom, projectionRect.Top,
+                -10, 10);
+            if (directional) LightMapDirection = new RenderTarget2D(
+                GD, (w - borderSize)*3*4, (h - borderSize)*2*4, false, SurfaceFormat.HalfVector4, DepthFormat.None, 0, RenderTargetUsage.PreserveContents);
 
             //initialize lighteffect with default params
             LightEffect.shadowMap = ShadowTarg;
@@ -173,7 +181,11 @@ namespace FSO.LotView.LMap
             LightEffect.RoomUVOff = new Vector2(-1f / w, -1f / h);
             LightEffect.TileSize = new Vector2(1f / w, 1f / h);
 
-            LightEffect.Projection = Matrix.CreateOrthographicOffCenter(new Rectangle(0, 0, 1, 1), -10, 10);
+            var lightProjectionRect = new Rectangle(0, 0, 1, 1);
+            LightEffect.Projection = Matrix.CreateOrthographicOffCenter(
+                lightProjectionRect.Left, lightProjectionRect.Right,
+                lightProjectionRect.Bottom, lightProjectionRect.Top,
+                -10, 10);
             LightEffect.LightPower = 2.2f;
             LightEffect.RoomUVRescale = new Vector2((w - borderSize) / (float)w, (h - borderSize) / (float)h);
             LightEffect.RoomUVOff = new Vector2(0, 0);
@@ -182,12 +194,12 @@ namespace FSO.LotView.LMap
             SetMapLayout(3, 2);
         }
 
-        private VertexPosition[] Dat;
+        private VertexPosition[] Data;
         private VertexBuffer LightBuf;
         public void InitBasicData()
         {
             //PrimitiveType.TriangleStrip
-            Dat = new VertexPosition[]
+            Data = new VertexPosition[]
             {
                 new VertexPosition(new Vector3(0, 0, 0)),
                 new VertexPosition(new Vector3(1, 0, 0)),
@@ -195,7 +207,7 @@ namespace FSO.LotView.LMap
                 new VertexPosition(new Vector3(1, 1, 0))
             };
             LightBuf = new VertexBuffer(GD, typeof(VertexPosition), 4, BufferUsage.None);
-            LightBuf.SetData(Dat);
+            LightBuf.SetData(Data);
         }
 
         public void ResetDraw()
@@ -306,7 +318,7 @@ namespace FSO.LotView.LMap
             if (LightMapDirection != null)
             {
                 GD.SetRenderTarget(LightMapDirection);
-                GD.Clear(Color.TransparentBlack);
+                GD.Clear(Color.Transparent);
             }
 
             for (int i = 0; i < rooms.Count; i++)
@@ -844,7 +856,13 @@ namespace FSO.LotView.LMap
                             tex = OutsideShadowTargPost;
                         }
 
-                        ShadowTargBlit.Begin(blendState: (i == 1)? OpaqueBA : BlendState.Opaque, effect: seffect, samplerState: SamplerState.PointClamp);
+                        ShadowTargBlit.Begin(
+                            SpriteSortMode.Deferred,
+                            (i == 1) ? OpaqueBA : BlendState.Opaque,
+                            SamplerState.PointClamp,
+                            DepthStencilState.None,
+                            RasterizerState.CullCounterClockwise,
+                            seffect);
                         ShadowTargBlit.Draw(tex, new Rectangle(0, 0, tex.Width, tex.Height), Color.White);
                         ShadowTargBlit.End();
                     }
@@ -906,7 +924,7 @@ namespace FSO.LotView.LMap
             if (clear) GD.Clear(Color.Black);
 
             effect.SetTechnique(RCObjectTechniques.LMapDraw);
-            EffectPassCollection passes = effect.Techniques[0].Passes;
+            EffectPassCollection passes = effect.CurrentTechnique.Passes;
             passes[0].Apply();
 
             var outside = pointLight.LightType == LightType.OUTDOORS;

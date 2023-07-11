@@ -21,6 +21,8 @@ namespace FSO.Common.Rendering.Framework.IO
     public class InputManager
     {
         private IFocusableUI LastFocus;
+        public bool CapsLockActive { get; private set; } = false;
+        public bool NumLockActive { get; private set; } = false;
         public bool RequireWindowFocus = false;
 
         public void SetFocus(IFocusableUI ui)
@@ -73,10 +75,19 @@ namespace FSO.Common.Rendering.Framework.IO
             var m_CurrentKeyState = state.KeyboardState;
             var m_OldKeyState = state.PreviousKeyboardState;
 
-
+            if (state.PreviousKeyboardState.IsKeyDown(Keys.CapsLock) &&
+                state.KeyboardState.IsKeyUp(Keys.CapsLock))
+            {
+                CapsLockActive = !CapsLockActive;
+            }
+            if (state.PreviousKeyboardState.IsKeyDown(Keys.NumLock) &&
+                state.KeyboardState.IsKeyUp(Keys.NumLock))
+            {
+                NumLockActive = !NumLockActive;
+            }
             result.ShiftDown = PressedKeys.Contains(Keys.LeftShift) || PressedKeys.Contains(Keys.RightShift);
-			result.CapsDown = state.KeyboardState.CapsLock;
-			result.NumLockDown = state.KeyboardState.NumLock;
+			result.CapsDown = CapsLockActive;
+			result.NumLockDown = NumLockActive;
             // Right alt aka AltGr is treated as Ctrl+Alt. It is used to type accented letters and other unusual characters so pressing that key cannot cause special actions.
             result.CtrlDown = (PressedKeys.Contains(Keys.LeftControl) && !PressedKeys.Contains(Keys.RightAlt)) || PressedKeys.Contains(Keys.RightControl);
 

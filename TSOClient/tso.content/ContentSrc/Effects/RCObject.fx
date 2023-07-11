@@ -1,4 +1,4 @@
-﻿#include "LightingCommon.fx"
+#include "LightingCommon.fx"
 
 float4x4 World;
 float4x4 ViewProjection;
@@ -228,7 +228,7 @@ technique Draw
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psRC();
-#endif;
+#endif
 	}
 
 	pass PassDirectional
@@ -239,7 +239,7 @@ technique Draw
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psDirRC();
-#endif;
+#endif
 	}
 }
 
@@ -253,7 +253,7 @@ technique DepthClear
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psDummy();
-#endif;
+#endif
 	}
 
 	pass Pass1
@@ -264,7 +264,7 @@ technique DepthClear
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psDepthClear();
-#endif;
+#endif
 	}
 }
 
@@ -278,7 +278,7 @@ technique DisabledDraw
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psDisabledRC();
-#endif;
+#endif
 	}
 }
 
@@ -292,7 +292,7 @@ technique WallDraw
 #else
 		VertexShader = compile vs_3_0 vsWallRC();
 		PixelShader = compile ps_3_0 psWallRC();
-#endif;
+#endif
 	}
 }
 
@@ -306,7 +306,7 @@ technique WallLMap
 #else
 		VertexShader = compile vs_3_0 vsWallLMap();
 		PixelShader = compile ps_3_0 psWallLMap();
-#endif;
+#endif
 	}
 }
 
@@ -320,6 +320,6 @@ technique LMapDraw
 #else
 		VertexShader = compile vs_3_0 vsRC();
 		PixelShader = compile ps_3_0 psLMapRC();
-#endif;
+#endif
 	}
 }

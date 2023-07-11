@@ -244,7 +244,7 @@ technique NoSSAA
 #else
         VertexShader = compile vs_3_0 vsVitaboy();
         PixelShader = compile ps_3_0 psVitaboyNoSSAA();
-#endif;
+#endif
     }
 }
 
@@ -258,7 +258,7 @@ technique ObjIDMode
 #else
         VertexShader = compile vs_3_0 vsVitaboy();
         PixelShader = compile ps_3_0 psObjID();
-#endif;
+#endif
     }
 }
 
@@ -273,7 +273,7 @@ technique AdvancedLighting
 #else
 		VertexShader = compile vs_3_0 vsVitaboy();
 		PixelShader = compile ps_3_0 psVitaboyAdv();
-#endif;
+#endif
 	}
 }
 
@@ -287,7 +287,7 @@ technique SSAA
 #else
 		VertexShader = compile vs_3_0 vsVitaboy();
 		PixelShader = compile ps_3_0 psVitaboy();
-#endif;
+#endif
 	}
 }
 
@@ -398,7 +398,7 @@ technique ShadowTech
 #else
 		VertexShader = compile vs_3_0 vsShadow();
 		PixelShader = compile ps_3_0 psShadow();
-#endif;
+#endif
 	}
 }
 
@@ -412,7 +412,7 @@ technique AdvancedLightingDirection
 #else
 		VertexShader = compile vs_3_0 vsVitaboy();
 		PixelShader = compile ps_3_0 psVitaboyDir();
-#endif;
+#endif
 	}
 }
 
@@ -427,6 +427,6 @@ technique HeadObject
 #else
 		VertexShader = compile vs_3_0 vsHeadObject();
 		PixelShader = compile ps_3_0 psHeadObject();
-#endif;
+#endif
 	}
 }

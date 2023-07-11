@@ -95,10 +95,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.Portable.3.6.0.1625\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
     </Reference>
@@ -207,6 +203,10 @@
     <Compile Include="Content\Preview\MeshPreviewComponent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FNA\FNA.csproj">
+      <Project>{35253ce1-c864-4cd3-8249-4d1319748e8f}</Project>
+      <Name>FNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Other\libs\TargaImage\TargaImage.csproj">
       <Project>{56f4bd87-2404-4263-80d5-6fa2161eb0a4}</Project>
       <Name>TargaImage</Name>

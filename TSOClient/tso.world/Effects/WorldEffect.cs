@@ -27,11 +27,6 @@ namespace FSO.LotView.Effects
             PrepareParams();
         }
 
-        public WorldEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-            PrepareParams();
-        }
-
         protected virtual void PrepareParams()
         {
             PrepareTechniques();

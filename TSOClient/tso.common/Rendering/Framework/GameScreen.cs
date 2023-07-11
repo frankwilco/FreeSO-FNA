@@ -41,9 +41,9 @@ namespace FSO.Common.Rendering.Framework
         }
 
         private static List<char> TextCharacters = new List<char>();
-        public static void TextInput(object sender, TextInputEventArgs e)
+        public static void TextInput(char c)
         {
-            TextCharacters.Add(e.Character);
+            TextCharacters.Add(c);
         }
 
         /// <summary>
@@ -143,66 +143,6 @@ namespace FSO.Common.Rendering.Framework
             }
 
             TextCharacters.Clear();
-        }
-
-        private void TouchStub(UpdateState state)
-        {
-            var test = TouchPanel.EnableMouseTouchPoint;
-            TouchCollection touches = TouchPanel.GetState();
-			if (touches.Count != lastTouchCount) touchedFrames = 0;
-			lastTouchCount = touches.Count;
-            if (touches.Count > 0)
-            {
-				Vector2 avg = new Vector2();
-				for (int i = 0; i < touches.Count; i++)
-				{
-					avg += touches[i].Position;
-				}
-				avg /= touches.Count;
-
-                if (touchedFrames < TOUCH_ACCEPT_TIME)
-                {
-                    avg = prevTouchAvg ?? avg;
-					state.MouseState = new MouseState(
-						(int)avg.X, (int)avg.Y, state.MouseState.ScrollWheelValue,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released
-					);
-                    touchedFrames++;
-                }
-                else
-                {
-                    state.MouseState = new MouseState(
-                        (int)avg.X, (int)avg.Y, state.MouseState.ScrollWheelValue,
-						(touches.Count > 1) ? ButtonState.Released : ButtonState.Pressed,
-                        (touches.Count > 1) ? ButtonState.Pressed : ButtonState.Released,
-                        (touches.Count > 1) ? ButtonState.Pressed : ButtonState.Released,
-                        ButtonState.Released,
-                        ButtonState.Released
-                        );
-                    prevTouchAvg = avg;
-
-                    state.TouchMode = true;
-                }
-            }
-            else
-            {
-                prevTouchAvg = null;
-                touchedFrames = 0;
-				if (state.TouchMode) state.MouseState = new MouseState(
-						lastMouseState.X, lastMouseState.Y, state.MouseState.ScrollWheelValue,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released,
-						ButtonState.Released
-					);
-                //state.TouchMode = false;
-            }
-			lastMouseState = state.MouseState;
         }
 
         public void Draw(GameTime time)

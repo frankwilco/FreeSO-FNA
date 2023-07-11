@@ -18,9 +18,15 @@ namespace FSO.Common.Utils
     {
         public static Texture2D TextureFromFile(GraphicsDevice gd, string filePath)
         {
-            using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            try
             {
-                return Texture2D.FromStream(gd, stream);
+                using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+                {
+                    return Texture2D.FromStream(gd, stream);
+                }
+            } catch (Exception)
+            {
+                return new Texture2D(gd, 1, 1);
             }
         }
 
@@ -159,7 +165,7 @@ namespace FSO.Common.Utils
             var old = gd.GetRenderTargets();
             var rt = new RenderTarget2D(gd, texture.Width, texture.Height);
             gd.SetRenderTarget(rt);
-            gd.Clear(Color.TransparentBlack);
+            gd.Clear(Color.Transparent);
             if (CopyBatch == null) CopyBatch = new SpriteBatch(gd);
             CopyBatch.Begin();
             CopyBatch.Draw(texture, Vector2.Zero, Color.White);
@@ -739,7 +745,7 @@ namespace FSO.Common.Utils
         private static void GetMinMaxColor(Color[] block, out Color minCol, out Color maxCol)
         {
             const int INSET_SHIFT = 4;
-            maxCol = Color.TransparentBlack;
+            maxCol = Color.Transparent;
             minCol = Color.White;
 
             for (int i = 0; i < 16; i++)
@@ -958,7 +964,7 @@ namespace FSO.Common.Utils
             lock (gd)
             {
                 gd.SetRenderTarget(renderTarget);
-                gd.Clear(Color.TransparentBlack);
+                gd.Clear(Color.Transparent);
                 SpriteBatch batch = new SpriteBatch(gd);
                 batch.Begin();
                 batch.Draw(texture, destinationRectangle, Color.White);

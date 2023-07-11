@@ -97,7 +97,7 @@ sampler TerrainNoiseSampler = sampler_state {
 	texture = <TerrainNoise>;
 	AddressU = WRAP; AddressV = WRAP; AddressW = WRAP;
 	MIPFILTER = NONE; MINFILTER = POINT; MAGFILTER = POINT;
-	MaxLOD = 0;
+	//MaxLOD = 0;
 };
 
 sampler TerrainNoiseMipSampler = sampler_state {
@@ -779,7 +779,7 @@ technique DrawBase
 #else
         VertexShader = compile vs_3_0 GrassVS();
         PixelShader = compile ps_3_0 BasePSSimple();
-#endif;
+#endif
 
     }
 
@@ -792,7 +792,7 @@ technique DrawBase
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BasePS();
-#endif;
+#endif
 
 	}
 
@@ -805,7 +805,7 @@ technique DrawBase
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BasePS3D();
-#endif;
+#endif
 
 	}
 
@@ -818,7 +818,7 @@ technique DrawBase
 #else
 		VertexShader = compile vs_3_0 GrassParallaxVS();
 		PixelShader = compile ps_3_0 RoofParallaxPS3D();
-#endif;
+#endif
 	}
 #endif
 
@@ -831,7 +831,7 @@ technique DrawBase
 #else
 		VertexShader = compile vs_3_0 GrassParallaxVS();
 		PixelShader = compile ps_3_0 FloorParallaxPS3D();
-#endif;
+#endif
 	}
 #endif
 }
@@ -847,7 +847,7 @@ technique DrawGrid
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 GridPS();
-#endif;
+#endif
 
 	}
 
@@ -860,7 +860,7 @@ technique DrawGrid
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 GridPS3D();
-#endif;
+#endif
 
 	}
 
@@ -873,7 +873,7 @@ technique DrawGrid
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 GridPSTex3D();
-#endif;
+#endif
 
 	}
 }
@@ -888,7 +888,7 @@ technique DrawBlades
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BladesPSSimple();
-#endif;
+#endif
 	}
 
 	pass MainBlades
@@ -899,7 +899,7 @@ technique DrawBlades
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BladesPS();
-#endif;
+#endif
 	}
 
 	pass MainBlades3D
@@ -910,7 +910,7 @@ technique DrawBlades
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BladesPS3D();
-#endif;
+#endif
 	}
 
 #if !SIMPLE
@@ -922,7 +922,7 @@ technique DrawBlades
 #else
 		VertexShader = compile vs_3_0 GrassParallaxVS();
 		PixelShader = compile ps_3_0 BladesParallaxPS3D();
-#endif;
+#endif
 	}
 #endif
 
@@ -939,7 +939,7 @@ technique DrawLMap
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BasePSLMap();
-#endif;
+#endif
 
 	}
 }
@@ -955,7 +955,7 @@ technique DrawMask
 #else
 		VertexShader = compile vs_3_0 GrassVS();
 		PixelShader = compile ps_3_0 BasePSMul();
-#endif;
+#endif
 
 	}
 }

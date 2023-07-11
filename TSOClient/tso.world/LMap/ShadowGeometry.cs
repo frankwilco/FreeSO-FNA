@@ -24,7 +24,7 @@ namespace FSO.LotView.LMap
 
             foreach (var i in walls)
             {
-                if (i.Contains(pointLight.LightPos)) topDown.Add(i);
+                if (i.Contains(pointLight.LightPos.ToPoint())) topDown.Add(i);
                 else {
                     projWalls.Add(ClosestPtsClockwise(i, pointLight.LightPos));
                     var ctr = i.Center;
@@ -143,9 +143,9 @@ namespace FSO.LotView.LMap
                         //yes
                         //continue;
                         var conectr = pts[2] + rightNorm;
-                        vertices.Add(GradVertex.ConeVert(pts[2], pts[2], conectr, Color.TransparentBlack, hc, p/2, ellipse));
-                        vertices.Add(GradVertex.ConeVert(rightpen1, pts[2], conectr, Color.TransparentBlack, hc, p/2, ellipse));
-                        vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], conectr, Color.TransparentBlack, hc, p/2, ellipse));
+                        vertices.Add(GradVertex.ConeVert(pts[2], pts[2], conectr, Color.Transparent, hc, p/2, ellipse));
+                        vertices.Add(GradVertex.ConeVert(rightpen1, pts[2], conectr, Color.Transparent, hc, p/2, ellipse));
+                        vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], conectr, Color.Transparent, hc, p/2, ellipse));
                         for (int i = 0; i < 3; i++) indices.Add(baseIdx + i);
                         continue;
                     }
@@ -158,9 +158,9 @@ namespace FSO.LotView.LMap
                         //yes
                         //continue;
                         var conectr = pts[0] + leftNorm;
-                        vertices.Add(GradVertex.ConeVert(pts[0], pts[0], conectr, Color.TransparentBlack, hc, p, ellipse));
-                        vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], conectr, Color.TransparentBlack, hc, p, ellipse));
-                        vertices.Add(GradVertex.ConeVert(leftpen2, pts[0], conectr, Color.TransparentBlack, hc, p, ellipse));
+                        vertices.Add(GradVertex.ConeVert(pts[0], pts[0], conectr, Color.Transparent, hc, p, ellipse));
+                        vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], conectr, Color.Transparent, hc, p, ellipse));
+                        vertices.Add(GradVertex.ConeVert(leftpen2, pts[0], conectr, Color.Transparent, hc, p, ellipse));
                         for (int i = 0; i < 3; i++) indices.Add(baseIdx + i);
                         continue;
                     }
@@ -194,13 +194,13 @@ namespace FSO.LotView.LMap
 
                     //penumbras
 
-                    vertices.Add(GradVertex.ConeVert(pts[0], pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(leftpen2, pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(pts[0], pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(leftpen2, pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
 
-                    vertices.Add(GradVertex.ConeVert(pts[2], pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(rightpen1, pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(pts[2], pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(rightpen1, pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
 
                     for (int i = 0; i < 6; i++) indices.Add(baseIdx + i);
                 }
@@ -220,15 +220,15 @@ namespace FSO.LotView.LMap
 
                     //penumbras: each penumbra becomes two tris as they intersect
 
-                    vertices.Add(GradVertex.ConeVert(pts[0], pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(inter, pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(distant, pts[0], leftpen2, Color.TransparentBlack, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(pts[0], pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(leftpen1, pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(inter, pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(distant, pts[0], leftpen2, Color.Transparent, Color.White, p, ellipse));
 
-                    vertices.Add(GradVertex.ConeVert(pts[2], pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(inter, pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
-                    vertices.Add(GradVertex.ConeVert(distant, pts[2], rightpen1, Color.TransparentBlack, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(pts[2], pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(rightpen2, pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(inter, pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
+                    vertices.Add(GradVertex.ConeVert(distant, pts[2], rightpen1, Color.Transparent, Color.White, p, ellipse));
 
                     indices.Add(baseIdx); indices.Add(baseIdx+1); indices.Add(baseIdx+2);
                     indices.Add(baseIdx+1); indices.Add(baseIdx + 3); indices.Add(baseIdx + 2);

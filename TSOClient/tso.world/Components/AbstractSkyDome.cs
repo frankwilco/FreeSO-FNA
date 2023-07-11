@@ -166,7 +166,7 @@ namespace FSO.LotView.Components
         public RasterizerState ClipState = new RasterizerState()
         {
             CullMode = CullMode.None,
-            DepthClipEnable = false
+            //DepthClipEnable = false
         };
 
         public void Draw(GraphicsDevice gd, Color outsideColor, Matrix view, Matrix projection, float time, WeatherController weather, Vector3 sunVector, float scale)

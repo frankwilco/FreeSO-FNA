@@ -20,7 +20,6 @@ using FSO.Common.Rendering.Framework.IO;
 using FSO.Common.Utils;
 using FSO.Common.Rendering.Framework;
 using FSO.Common;
-using Microsoft.Xna.Framework.GamerServices;
 using System.Threading;
 
 namespace FSO.Client.UI.Controls
@@ -374,7 +373,7 @@ namespace FSO.Client.UI.Controls
                 m_cursorBlink = true;
                 m_cursorBlinkLastTime = GameFacade.LastUpdateState.Time.TotalGameTime.Ticks;
                 if (FSOEnvironment.SoftwareKeyboard && FSOEnvironment.SoftwareDepth)
-                {
+                {/*
                     try
                     {
                         Guide.BeginShowKeyboardInput(PlayerIndex.One, "", "", CurrentText, (ar) =>
@@ -387,6 +386,7 @@ namespace FSO.Client.UI.Controls
                         }, null);
                     }
                     catch (Exception e) { }
+                    */
                 }
             }
             else
@@ -1451,8 +1451,8 @@ namespace FSO.Client.UI.Controls
         public virtual void Draw(UIElement ui, SpriteBatch batch)
         {
             batch.Draw(
-                EmojiTarget, 
-                Position.ToPoint().ToVector2() + new Vector2(1, 0), 
+                EmojiTarget,
+                new Vector2((float)(Math.Round(Position.X, 0) + 1), Position.Y), 
                 Slice, 
                 (Shadow?Color.Black:Color.White) * (Style.Color.A / 255f), 
                 0f, 
@@ -1509,10 +1509,15 @@ namespace FSO.Client.UI.Controls
                     Style.VFont.Draw(batch.GraphicsDevice, Text, Position, Style.Color, Scale, mat);
                 }
 
-                if (mat != null)
-                    batch.Begin(transformMatrix: mat, rasterizerState: RasterizerState.CullNone);
-                else
-                    batch.Begin(rasterizerState: RasterizerState.CullNone);
+                batch.Begin(
+                    SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.LinearClamp,
+                    DepthStencilState.None,
+                    RasterizerState.CullNone,
+                    null,
+                    mat.GetValueOrDefault(Matrix.Identity)
+                );
             }
             else
             {

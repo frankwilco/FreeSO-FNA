@@ -1,4 +1,4 @@
-﻿//fixed parameters
+//fixed parameters
 float4x4 Projection;
 float2 TileSize; //used for position to room masking. percentage of position space (0, 1) a tile takes up.
 
@@ -298,7 +298,7 @@ technique Draw2D
 #else
         VertexShader = compile vs_3_0 VertexShaderFunction();
         PixelShader = compile ps_3_0 PixelShaderFunction();
-#endif;
+#endif
 
     }
 
@@ -312,7 +312,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PixelShaderFunctionOutdoors();
-#endif;
+#endif
 
 	}
 
@@ -325,7 +325,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PixelShaderFunctionMask();
-#endif;
+#endif
 
 	}
 
@@ -339,7 +339,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PixelShaderFunctionLightBleed();
-#endif;
+#endif
 
 	}
 
@@ -353,7 +353,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PixelShaderFunctionOutdoorsSSAA();
-#endif;
+#endif
 
 	}
 
@@ -367,7 +367,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PixelShaderFunctionBlur();
-#endif;
+#endif
 
 	}
 }
@@ -384,7 +384,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunction();
-#endif;
+#endif
 
 	}
 
@@ -398,7 +398,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunctionOutdoors();
-#endif;
+#endif
 
 	}
 
@@ -411,7 +411,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunctionMask();
-#endif;
+#endif
 
 	}
 
@@ -425,7 +425,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunctionLightBleed();
-#endif;
+#endif
 
 	}
 
@@ -439,7 +439,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunctionOutdoorsSSAA();
-#endif;
+#endif
 
 	}
 
@@ -453,7 +453,7 @@ technique DrawDirection
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 DirectionFunction();
-#endif;
+#endif
 
 	}
 }

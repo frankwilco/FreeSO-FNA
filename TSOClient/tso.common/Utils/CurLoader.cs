@@ -1,10 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,14 +14,48 @@ namespace FSO.Common.Utils
 {
     public static class CurLoader
     {
-
-        public static MouseCursor LoadMonoCursor(GraphicsDevice gd, Stream stream)
+        private static IntPtr GetHandleFromTexture2D(Texture2D texture, int originx, int originy)
         {
-            var cur = LoadCursor(gd, stream);
-            return MouseCursor.FromTexture2D(cur.Item1, cur.Item2.X, cur.Item2.Y);
+            IntPtr surface = IntPtr.Zero;
+            IntPtr handle = IntPtr.Zero;
+            IntPtr bytesHandle;
+            try
+            {
+                var bytes = new byte[texture.Width * texture.Height * 4];
+                texture.GetData(bytes);
+                
+                bytesHandle = Marshal.AllocHGlobal(bytes.Length);
+                Marshal.Copy(bytes, 0, bytesHandle, bytes.Length);
+                surface = SDL.SDL_CreateRGBSurfaceFrom(bytesHandle, texture.Width, texture.Height, 32, texture.Width * 4, 0x000000ff, 0x0000FF00, 0x00FF0000, 0xFF000000);
+                Marshal.FreeHGlobal(bytesHandle);
+                if (surface == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException("Failed to create surface for mouse cursor: " + SDL.SDL_GetError());
+                }
+
+                handle = SDL.SDL_CreateColorCursor(surface, originx, originy);
+                if (handle == IntPtr.Zero)
+                {
+                    throw new InvalidOperationException("Failed to set surface for mouse cursor: " + SDL.SDL_GetError());
+                }
+            }
+            finally
+            {
+                if (surface != IntPtr.Zero)
+                {
+                    SDL.SDL_FreeSurface(surface);
+                }
+            }
+            return handle;
         }
 
-        public static MouseCursor[] LoadUpgradeCursors(GraphicsDevice gd, Stream stream, int maxStars)
+        public static IntPtr LoadMonoCursor(GraphicsDevice gd, Stream stream)
+        {
+            var cur = LoadCursor(gd, stream);
+            return GetHandleFromTexture2D(cur.Item1, cur.Item2.X, cur.Item2.Y);
+        }
+
+        public static IntPtr[] LoadUpgradeCursors(GraphicsDevice gd, Stream stream, int maxStars)
         {
             var cur = LoadCursor(gd, stream);
             Texture2D starTex;
@@ -29,14 +65,14 @@ namespace FSO.Common.Utils
             }
 
             var batch = new SpriteBatch(gd);
-            var results = new MouseCursor[maxStars];
+            var results = new IntPtr[maxStars];
             for (int i = 0; i < maxStars; i++) {
                 var starPos = cur.Item1.Width - 12;
                 var width = Math.Max(starPos + 8 * i + 9, cur.Item1.Width);
                 var tex = new RenderTarget2D(gd, width, Math.Max(width, cur.Item1.Height));
                 gd.SetRenderTarget(tex);
                 gd.Clear(Color.Transparent);
-                batch.Begin(SpriteSortMode.Immediate);
+                batch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
                 batch.Draw(cur.Item1, Vector2.Zero, Color.White);
                 for (int j=0; j<=i; j++)
                 {
@@ -45,7 +81,7 @@ namespace FSO.Common.Utils
                 }
                 batch.End();
                 gd.SetRenderTarget(null);
-                results[i] = MouseCursor.FromTexture2D(tex, cur.Item2.X, cur.Item2.Y);
+                results[i] = GetHandleFromTexture2D(tex, cur.Item2.X, cur.Item2.Y);
             }
             starTex.Dispose();
 

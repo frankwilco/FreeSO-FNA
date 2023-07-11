@@ -29,10 +29,6 @@ namespace FSO.LotView.Effects
         {
         }
 
-        public GradEffect(GraphicsDevice graphicsDevice, byte[] effectCode, int index, int count) : base(graphicsDevice, effectCode, index, count)
-        {
-        }
-
         public GradEffect(Effect cloneSource) : base(cloneSource)
         {
         }

@@ -70,7 +70,7 @@ technique DrawSSAA4
 #else
         VertexShader = compile vs_3_0 VertexShaderFunction();
         PixelShader = compile ps_3_0 PixelShaderFunction();
-#endif;
+#endif
 
     }
 }

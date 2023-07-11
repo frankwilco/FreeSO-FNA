@@ -182,7 +182,7 @@ namespace FSO.LotView
             var size = new Vector2(state._2D.LastWidth, state._2D.LastHeight);
             var mainBd = state.WorldSpace.GetScreenFromTile(state.CenterTile);
             var diff = pxOffset - mainBd;
-            state.WorldRectangle = new Rectangle((pxOffset).ToPoint(), size.ToPoint());
+            state.WorldRectangle = new Rectangle((int)pxOffset.X, (int)pxOffset.Y, (int)size.X, (int)size.Y);
             state.PrepareCulling(pxOffset);
 
             IEnumerable<ObjectComponent> staticObj;

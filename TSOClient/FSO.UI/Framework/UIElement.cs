@@ -838,10 +838,8 @@ namespace FSO.Client.UI.Framework
                     style.VFont.Draw(batch.GraphicsDevice, text, pos + new Vector2(FSOEnvironment.DPIScaleFactor), Color.Black, scale, mat);
                 style.VFont.Draw(batch.GraphicsDevice, text, pos, style.GetColor(state) * Opacity, scale, mat);
 
-                if (mat != null)
-                    batch.Begin(transformMatrix: mat, rasterizerState: RasterizerState.CullNone);
-                else
-                    batch.Begin(rasterizerState: RasterizerState.CullNone);
+                batch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp,
+                    DepthStencilState.None, RasterizerState.CullNone, null, mat.GetValueOrDefault(Microsoft.Xna.Framework.Matrix.Identity));
             }
             else
             {
@@ -1007,7 +1005,7 @@ namespace FSO.Client.UI.Framework
         public bool HitTestArea(MouseState state, Rectangle area, bool cache)
         {
             if (!Visible) { return false; }
-            return area.Contains(GlobalPoint(state.Position.ToVector2()));
+            return area.Contains(GlobalPoint(state.Position.ToVector2()).ToPoint());
         }
 
         private List<UIMouseEventRef> m_MouseRefs;

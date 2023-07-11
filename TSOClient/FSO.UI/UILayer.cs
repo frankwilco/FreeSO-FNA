@@ -288,10 +288,11 @@ namespace FSO.Client.UI
 
             if (GameFacade.Game.Window == null) return;
 
-            var mousePosition = state.MouseState.Position;
+            var mouseX = state.MouseState.X;
+            var mouseY = state.MouseState.Y;
             var bounds = GameFacade.Game.Window.ClientBounds;
-            state.MouseOverWindow = mousePosition.X > 0 && mousePosition.Y > 0 &&
-                                    mousePosition.X < bounds.Width && mousePosition.Y < bounds.Height;
+            state.MouseOverWindow = mouseX > 0 && mouseY > 0 &&
+                                    mouseX < bounds.Width && mouseY < bounds.Height;
             if (FSOEnvironment.SoftwareKeyboard) state.MouseOverWindow = true;
             state.WindowFocused = GameFacade.Game.IsActive;
 

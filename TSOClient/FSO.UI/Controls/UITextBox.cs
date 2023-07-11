@@ -19,7 +19,6 @@ using FSO.Common.Rendering.Framework.Model;
 using FSO.Common.Utils;
 using FSO.Client.GameContent;
 using FSO.Client.UI.Framework.Parser;
-using Microsoft.Xna.Framework.GamerServices;
 using FSO.Common;
 using System.Threading;
 

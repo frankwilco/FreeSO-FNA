@@ -103,10 +103,6 @@
     <Reference Include="deltaq, Version=1.0.0.0, Culture=neutral, PublicKeyToken=4ec66318c45104d7, processorArchitecture=MSIL">
       <HintPath>..\packages\deltaq.1.0.1\lib\deltaq.dll</HintPath>
     </Reference>
-    <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MonoGame.Framework.Portable.3.6.0.1625\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
     </Reference>
@@ -245,6 +241,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\FNA\FNA.csproj">
+      <Project>{35253CE1-C864-4CD3-8249-4D1319748E8F}</Project>
+      <Name>FNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Other\libs\TargaImagePCL\TargaImagePCL.csproj">
       <Project>{d8232422-9d79-4200-a981-eb70ed82ccf3}</Project>
       <Name>TargaImagePCL</Name>

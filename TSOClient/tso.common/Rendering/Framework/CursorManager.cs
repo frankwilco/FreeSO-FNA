@@ -16,6 +16,7 @@ using Microsoft.Xna.Framework;
 using System.IO;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using SDL2;
 using FSO.Common.Utils;
 
 namespace FSO.Common.Rendering.Framework
@@ -63,14 +64,14 @@ namespace FSO.Common.Rendering.Framework
     {
         public static CursorManager INSTANCE;
 
-        private Dictionary<CursorType, MouseCursor> m_CursorMap;
+        private Dictionary<CursorType, IntPtr> m_CursorMap;
         private GraphicsDevice GD;
         public CursorType CurrentCursor { get; internal set;} = CursorType.Normal;
 
         public CursorManager(GraphicsDevice gd)
         {
             INSTANCE = this;
-            m_CursorMap = new Dictionary<CursorType, MouseCursor>();
+            m_CursorMap = new Dictionary<CursorType, IntPtr>();
             this.GD = gd;
         }
 
@@ -79,7 +80,7 @@ namespace FSO.Common.Rendering.Framework
             if (m_CursorMap.ContainsKey(type))
             {
                 CurrentCursor = type;
-                Mouse.SetCursor(m_CursorMap[type]);
+                SDL.SDL_SetCursor(m_CursorMap[type]);
             }
         }
 
@@ -133,17 +134,17 @@ namespace FSO.Common.Rendering.Framework
                 m_CursorMap.Add(CursorType.LiveObject1Star + i, stars[i]);
             }
 
-            m_CursorMap.Add(CursorType.IBeam, MouseCursor.IBeam);
-            //m_CursorMap.Add(CursorType.Hourglass, MouseCursor.Wait);
-            m_CursorMap.Add(CursorType.Normal, MouseCursor.Arrow);
+            m_CursorMap.Add(CursorType.IBeam, SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_IBEAM));
+            //m_CursorMap.Add(CursorType.Normal, SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_WAIT));
+            m_CursorMap.Add(CursorType.Normal, SDL.SDL_CreateSystemCursor(SDL.SDL_SystemCursor.SDL_SYSTEM_CURSOR_ARROW));
         }
 
-        private MouseCursor[] LoadUpgradeCursors(string path, int maxStars)
+        private IntPtr[] LoadUpgradeCursors(string path, int maxStars)
         {
             return CurLoader.LoadUpgradeCursors(GD, File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read), maxStars);
         }
 
-        private MouseCursor LoadCustomCursor(string path)
+        private IntPtr LoadCustomCursor(string path)
         {
             return CurLoader.LoadMonoCursor(GD, File.Open(path, FileMode.Open, FileAccess.Read, FileShare.Read));
         }

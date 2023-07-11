@@ -228,10 +228,10 @@ namespace FSO.LotView.Components
             u3.Normalize();
 
             return new Matrix(
-                new Vector4(u3, 0),
-                new Vector4(u1, 0),
-                new Vector4(u2, 0),
-                new Vector4(0, 0, 0, 1));
+                u3.X, u3.Y, u3.Z, 0,
+                u1.X, u1.Y, u1.Z, 0,
+                u2.X, u2.Y, u2.Z, 0,
+                0, 0, 0, 1);
         }
 
         private Matrix NormalToMatrix()

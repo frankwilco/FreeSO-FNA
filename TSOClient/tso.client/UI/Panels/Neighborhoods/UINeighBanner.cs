@@ -111,7 +111,15 @@ namespace FSO.Client.UI.Panels.Neighborhoods
                 gd.Clear(Color.Transparent);
                 var scale = Microsoft.Xna.Framework.Matrix.CreateScale(IntScale);
                 Batch.BatchMatrixStack.Push(scale);
-                Batch.Begin(transformMatrix: scale);
+                Batch.Begin(
+                    SpriteSortMode.Deferred,
+                    BlendState.AlphaBlend,
+                    SamplerState.LinearClamp,
+                    DepthStencilState.None,
+                    RasterizerState.CullCounterClockwise,
+                    null,
+                    scale
+                );
 
                 var o = Opacity;
                 Opacity = 1;

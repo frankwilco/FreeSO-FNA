@@ -364,7 +364,7 @@ namespace FSO.Common.WorldGeometry
                 //no children means we are a leaf. triangulate, cause nobody else is doing it for me.
                 var lt = parent.GetVertex(Range.Location);
                 var rt = parent.GetVertex(Range.Location + new Point(Range.Width, 0));
-                var rb = parent.GetVertex(Range.Location + Range.Size);
+                var rb = parent.GetVertex(new Point(Range.Location.X + Range.Width, Range.Location.Y + Range.Height));
                 var lb = parent.GetVertex(Range.Location + new Point(0, Range.Height));
 
                 parent.AddTri(lt, rt, rb);
@@ -376,7 +376,7 @@ namespace FSO.Common.WorldGeometry
                 var ctr = parent.GetVertex(Range.Location + new Point(Range.Width/2, Range.Height/2));
                 var lt = parent.GetVertex(Range.Location);
                 var rt = parent.GetVertex(Range.Location + new Point(Range.Width, 0));
-                var rb = parent.GetVertex(Range.Location + Range.Size);
+                var rb = parent.GetVertex(new Point(Range.Location.X + Range.Width, Range.Location.Y + Range.Height));
                 var lb = parent.GetVertex(Range.Location + new Point(0, Range.Height));
                 if (Children[0] == null) //from top left
                 {

@@ -117,7 +117,7 @@ technique Draw2D
 #else
         VertexShader = compile vs_3_0 VertexShaderFunction();
         PixelShader = compile ps_3_0 PSNormal();
-#endif;
+#endif
 
     }
 
@@ -130,7 +130,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PSEllipse();
-#endif;
+#endif
 
 	}
 
@@ -143,7 +143,7 @@ technique Draw2D
 #else
 		VertexShader = compile vs_3_0 VertexShaderFunction();
 		PixelShader = compile ps_3_0 PSLinear();
-#endif;
+#endif
 
 	}
 }

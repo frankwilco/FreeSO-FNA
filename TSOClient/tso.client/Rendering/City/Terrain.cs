@@ -754,7 +754,7 @@ namespace FSO.Client.Rendering.City
         private void DrawHouses(float HB) //draws house icons in far view
         {
             var spriteBatch = m_Batch;
-            spriteBatch.Begin(sortMode: SpriteSortMode.Texture);
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
             float iScale = (float)m_ScrWidth / (HB * 2);
             LotTileEntry[] lots = LotTileData;
             for (int i=0; i<lots.Length; i++) {
@@ -897,7 +897,7 @@ namespace FSO.Client.Rendering.City
         private void DrawSprites(float HB, float VB)
         {
             var spriteBatch = m_Batch;
-            spriteBatch.Begin(sortMode: SpriteSortMode.Texture);
+            spriteBatch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
 
             if (Camera.Zoomed == TerrainZoomMode.Far && HandleMouse)
             {
@@ -1419,10 +1419,10 @@ namespace FSO.Client.Rendering.City
 
             var invView = Matrix.Invert(mv);
             if (Camera is CityCamera3D) invView.Translation = Vector3.Zero;
-            else invView = new Matrix(new Vector4(0.7071068f, 0f, 0.7071068f, 0),
-                new Vector4(0.3535534f, 0.8660254f, -0.3535534f, 0),
-                new Vector4(-0.6123725f, 0.5f, 0.6123725f, 0),
-                new Vector4(0, 0, 0, 1));
+            else invView = new Matrix(0.7071068f, 0f, 0.7071068f, 0,
+                0.3535534f, 0.8660254f, -0.3535534f, 0,
+                -0.6123725f, 0.5f, 0.6123725f, 0,
+                0, 0, 0, 1);
             PixelShader.Parameters["InvView"].SetValue(invView);
             var dist = 0.3f + lightVec.Y;
             dist *= dist;
@@ -1529,7 +1529,7 @@ namespace FSO.Client.Rendering.City
                 if (Camera.Zoomed == TerrainZoomMode.Near)
                 {
                     m_2DVerts = new ArrayList(); //refresh list for tris under houses
-                    m_Batch.Begin(SpriteSortMode.Texture);
+                    m_Batch.Begin(SpriteSortMode.Texture, BlendState.AlphaBlend);
                     DrawTileBorders(0, m_Batch);
                     m_Batch.End();
                     m_GraphicsDevice.DepthStencilState = DepthStencilState.Default;

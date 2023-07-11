@@ -32,21 +32,6 @@ namespace FSO.Common.Rendering
             : base(graphicsDevice, width, height, mipmap, format)
         {
         }
-        /// <summary>
-        /// Creates a new texture array of a given size with a surface format and optional mipmaps.
-        /// Throws ArgumentException if the current GraphicsDevice can't work with texture arrays
-        /// </summary>
-        /// <param name="graphicsDevice"></param>
-        /// <param name="width"></param>
-        /// <param name="height"></param>
-        /// <param name="mipmap"></param>
-        /// <param name="format"></param>
-        /// <param name="arraySize"></param>
-        public CachableTexture2D(GraphicsDevice graphicsDevice, int width, int height, bool mipmap, SurfaceFormat format, int arraySize)
-            : base(graphicsDevice, width, height, mipmap, format, arraySize)
-        {
-
-        }
 
         private bool WasReferenced = true;
         public bool BeingDisposed = false;

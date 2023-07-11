@@ -1,4 +1,4 @@
-﻿#define SIMPLE 1
+#define SIMPLE 1
 #include "RCObject.fx"
 
 float dummy() {
